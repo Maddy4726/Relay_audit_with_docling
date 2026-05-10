@@ -56,6 +56,8 @@ def _is_ct_ratio_section_title(norm: str) -> bool:
         return True
     if "RATIO TEST" in norm and ("PRIMARY" in norm or "INJECTION" in norm):
         return True
+    if "CBCT" in norm and "RATIO" in norm:
+        return True
     return False
 
 
@@ -361,6 +363,8 @@ def _score_table(headers: list[str]) -> float:
         score += 0.35
     if _PRIMARY_COL_RE.search(h):
         score += 0.35
+    if "SECONDARY" in h:
+        score += 0.32
     if _RELAY_COL_RE.search(h) or _AMMETER_COL_RE.search(h):
         score += 0.3
     return score

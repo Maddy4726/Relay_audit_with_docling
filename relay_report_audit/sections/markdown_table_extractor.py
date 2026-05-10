@@ -259,14 +259,17 @@ def _append_continuation_to_previous_row(rows: list[list[str]], text: str) -> No
     row[target] = f"{prev}\n{text}" if prev.strip() else text
 
 
-def _extract_tables_in_span(
+def extract_tables_between_lines(
     lines: list[str],
-    span: _SectionSpan,
+    start_line: int,
+    end_line: int,
+    *,
+    section_label: str,
 ) -> list[SectionTable]:
-    """Find and parse all GFM pipe tables whose header+separator starts within span."""
+    """Parse all GFM pipe tables whose header rows fall within ``[start_line, end_line)``."""
     results: list[SectionTable] = []
-    i = span.start_line
-    end = span.end_line
+    i = start_line
+    end = end_line
 
     while i < end:
         header_line = lines[i]
@@ -311,7 +314,7 @@ def _extract_tables_in_span(
                     logger.debug(
                         "End of table before stacked table at line %d (section %s)",
                         k + 1,
-                        span.title,
+                        section_label,
                     )
                     break
 
@@ -324,14 +327,14 @@ def _extract_tables_in_span(
                         "Skipping repeated header block at lines %d-%d inside section %s",
                         k + 1,
                         k + 2,
-                        span.title,
+                        section_label,
                     )
                     repeated_skips += 1
                     k += 2
                     continue
                 if len(nxt) == len(headers):
                     # New table with same width but different header text — end current table
-                    logger.debug("New separator at line %d ends table in section %s", k + 1, span.title)
+                    logger.debug("New separator at line %d ends table in section %s", k + 1, section_label)
                     break
 
             row_cells = _split_pipe_row(raw)
@@ -341,7 +344,7 @@ def _extract_tables_in_span(
                     logger.debug(
                         "Treating line %d as continuation (no pipes) in section %s",
                         k + 1,
-                        span.title,
+                        section_label,
                     )
                     _append_continuation_to_previous_row(rows, stripped)
                     k += 1
@@ -358,7 +361,7 @@ def _extract_tables_in_span(
                 logger.debug(
                     "Merging partial pipe row at line %d into previous row (section %s)",
                     k + 1,
-                    span.title,
+                    section_label,
                 )
                 for idx, cell in enumerate(row_cells):
                     prev = rows[-1][idx] if idx < len(rows[-1]) else ""
@@ -372,7 +375,7 @@ def _extract_tables_in_span(
                 logger.warning(
                     "Ragged column count at line %d in section %s: got %d cells expected %d",
                     k + 1,
-                    span.title,
+                    section_label,
                     len(row_cells),
                     len(headers),
                 )
@@ -397,14 +400,14 @@ def _extract_tables_in_span(
 
         logger.info(
             "Extracted table in section %s: %d columns, %d data rows, confidence=%.4f",
-            span.title,
+            section_label,
             len(headers),
             len(rows),
             conf,
         )
         results.append(
             SectionTable(
-                section=span.title,
+                section=section_label,
                 confidence=conf,
                 headers=headers,
                 rows=rows,
@@ -415,6 +418,19 @@ def _extract_tables_in_span(
         continue
 
     return results
+
+
+def _extract_tables_in_span(
+    lines: list[str],
+    span: _SectionSpan,
+) -> list[SectionTable]:
+    """Find and parse all GFM pipe tables whose header+separator starts within span."""
+    return extract_tables_between_lines(
+        lines,
+        span.start_line,
+        span.end_line,
+        section_label=span.title,
+    )
 
 
 def extract_relay_section_tables(
@@ -452,8 +468,20 @@ def extract_relay_section_tables(
     return out
 
 
+def extract_pipe_tables_from_markdown_fragment(
+    markdown_fragment: str,
+    *,
+    section_label: str = "FRAGMENT",
+) -> list[dict[str, Any]]:
+    """Extract every GFM pipe table in a markdown snippet (no section heading filter)."""
+    lines = markdown_fragment.splitlines()
+    return [t.as_dict() for t in extract_tables_between_lines(lines, 0, len(lines), section_label=section_label)]
+
+
 __all__ = [
     "DEFAULT_TARGET_SECTIONS",
     "SectionTable",
+    "extract_pipe_tables_from_markdown_fragment",
     "extract_relay_section_tables",
+    "extract_tables_between_lines",
 ]
