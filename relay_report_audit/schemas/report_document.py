@@ -56,6 +56,10 @@ class ReportSectionJson(BaseModel):
         default=None,
         description="When routed, structured output (e.g. contact resistance or CT ratio model_dump).",
     )
+    protection_metadata: list[dict[str, Any]] | None = Field(
+        default=None,
+        description="Parsed protection-setting prose blocks (raw + normalized) for DTOC/IDMT-style sections.",
+    )
     confidence: float = Field(default=0.0, ge=0.0, le=1.0)
 
 

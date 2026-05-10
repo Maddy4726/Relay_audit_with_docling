@@ -28,6 +28,11 @@ from relay_report_audit.sections.markdown_table_extractor import (
     _parse_list_marker_section,
     extract_pipe_tables_from_markdown_fragment,
 )
+from relay_report_audit.sections.protection_metadata_extract import (
+    extract_protection_body_prose,
+    is_protection_test_section_heading,
+    parse_protection_metadata_blocks,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -294,6 +299,13 @@ def build_report_document(
 
         tables = _tables_models(tables_raw)
 
+        prot_meta: list[dict] | None = None
+        if ext == "generic_tables" and is_protection_test_section_heading(norm):
+            ptext = extract_protection_body_prose(body_md)
+            blocks = parse_protection_metadata_blocks(ptext)
+            if blocks:
+                prot_meta = [b.model_dump() for b in blocks]
+
         built.append(
             ReportSectionJson(
                 ordinal=ordinal,
@@ -308,6 +320,7 @@ def build_report_document(
                 body_markdown=body_md,
                 tables=tables,
                 typed_payload=typed,
+                protection_metadata=prot_meta,
                 confidence=round(conf, 4),
             )
         )

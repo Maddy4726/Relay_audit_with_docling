@@ -31,6 +31,8 @@ def _to_motor_record(s: ReportSectionJson) -> MotorFeederSectionRecord:
     payload["table_count"] = len(s.tables)
     if s.outline is not None:
         payload["outline"] = s.outline
+    if s.protection_metadata:
+        payload["protection_metadata"] = s.protection_metadata
     return MotorFeederSectionRecord(
         order_index=s.ordinal,
         header_line_1based=s.source_line_1based,
