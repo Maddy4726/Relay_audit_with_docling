@@ -1,0 +1,2 @@
+# Standalone project with its own .git; track separately or push from that directory.
+relay_section_detector/
