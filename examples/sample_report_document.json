@@ -1,0 +1,314 @@
+{
+  "markdown_line_count": 49,
+  "sections": [
+    {
+      "ordinal": 0,
+      "source_line_1based": 1,
+      "section_slug": "circuit-breaker",
+      "heading_kind": "atx",
+      "heading_raw": "## CIRCUIT BREAKER",
+      "heading_normalized": "CIRCUIT BREAKER",
+      "outline": null,
+      "parent_section_slug": null,
+      "extractor_id": "generic_tables",
+      "body_markdown": "",
+      "tables": [],
+      "typed_payload": null,
+      "confidence": 0.0
+    },
+    {
+      "ordinal": 1,
+      "source_line_1based": 3,
+      "section_slug": "low-resistance-test",
+      "heading_kind": "list",
+      "heading_raw": "- 2.1 LOW RESISTANCE TEST",
+      "heading_normalized": "LOW RESISTANCE TEST",
+      "outline": [
+        2,
+        1
+      ],
+      "parent_section_slug": null,
+      "extractor_id": "generic_tables",
+      "body_markdown": "\n| Check | Result |\n| ----- | ------ |\n| A | OK |\n",
+      "tables": [
+        {
+          "headers": [
+            "Check",
+            "Result"
+          ],
+          "rows": [
+            [
+              "A",
+              "OK"
+            ]
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "typed_payload": null,
+      "confidence": 1.0
+    },
+    {
+      "ordinal": 2,
+      "source_line_1based": 9,
+      "section_slug": "contact-resistance-test",
+      "heading_kind": "list",
+      "heading_raw": "- 2.4 CONTACT RESISTANCE TEST:",
+      "heading_normalized": "CONTACT RESISTANCE TEST",
+      "outline": [
+        2,
+        4
+      ],
+      "parent_section_slug": null,
+      "extractor_id": "contact_resistance",
+      "body_markdown": "\n| Phase | Value (mΩ) |\n| ----- | ---------- |\n| R | 1 |\n",
+      "tables": [
+        {
+          "headers": [
+            "Phase",
+            "Value (mΩ)"
+          ],
+          "rows": [
+            [
+              "R",
+              "1"
+            ]
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "typed_payload": {
+        "section": "CONTACT RESISTANCE TEST",
+        "confidence": 1.0,
+        "measurements": [
+          {
+            "phase": "R",
+            "resistance_micro_ohm": 1000.0
+          }
+        ]
+      },
+      "confidence": 1.0
+    },
+    {
+      "ordinal": 3,
+      "source_line_1based": 15,
+      "section_slug": "ratio-test-by-primary-injection",
+      "heading_kind": "numbered",
+      "heading_raw": "3. RATIO TEST: (BY PRIMARY INJECTION)",
+      "heading_normalized": "RATIO TEST: (BY PRIMARY INJECTION)",
+      "outline": [
+        3
+      ],
+      "parent_section_slug": null,
+      "extractor_id": "ct_ratio",
+      "body_markdown": "",
+      "tables": [],
+      "typed_payload": {
+        "section": "CT RATIO TEST",
+        "ct_ratio": "",
+        "confidence": 0.0,
+        "measurements": []
+      },
+      "confidence": 0.0
+    },
+    {
+      "ordinal": 4,
+      "source_line_1based": 17,
+      "section_slug": "3-1-ct-ctr-10-5-a",
+      "heading_kind": "numbered",
+      "heading_raw": "2. 3.1 CT (CTR: 10/5 A)",
+      "heading_normalized": "3.1 CT (CTR: 10/5 A)",
+      "outline": [
+        2
+      ],
+      "parent_section_slug": null,
+      "extractor_id": "ct_ratio",
+      "body_markdown": "\n| Phase Ref. | Injected current in Primary (A) | RELAY |\n| ---------- | -------------------------------- | ----- |\n| R | 10 | 10 |\n",
+      "tables": [
+        {
+          "headers": [
+            "Phase Ref.",
+            "Injected current in Primary (A)",
+            "RELAY"
+          ],
+          "rows": [
+            [
+              "R",
+              "10",
+              "10"
+            ]
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "typed_payload": {
+        "section": "CT RATIO TEST",
+        "ct_ratio": "10/5",
+        "confidence": 0.9258,
+        "measurements": [
+          {
+            "phase": "R",
+            "primary_current": 10.0,
+            "relay_secondary_current": 10.0
+          }
+        ]
+      },
+      "confidence": 0.9258
+    },
+    {
+      "ordinal": 5,
+      "source_line_1based": 23,
+      "section_slug": "transformer-testing",
+      "heading_kind": "caps",
+      "heading_raw": "TRANSFORMER TESTING",
+      "heading_normalized": "TRANSFORMER TESTING",
+      "outline": null,
+      "parent_section_slug": null,
+      "extractor_id": "generic_tables",
+      "body_markdown": "",
+      "tables": [],
+      "typed_payload": null,
+      "confidence": 0.0
+    },
+    {
+      "ordinal": 6,
+      "source_line_1based": 25,
+      "section_slug": "winding-resistance-test",
+      "heading_kind": "list",
+      "heading_raw": "- 5.0 WINDING RESISTANCE TEST:",
+      "heading_normalized": "WINDING RESISTANCE TEST",
+      "outline": [
+        5,
+        0
+      ],
+      "parent_section_slug": "transformer-testing",
+      "extractor_id": "generic_tables",
+      "body_markdown": "\n| Tap | Ohms |\n| --- | ---- |\n| 1 | 1.2 |\n",
+      "tables": [
+        {
+          "headers": [
+            "Tap",
+            "Ohms"
+          ],
+          "rows": [
+            [
+              "1",
+              "1.2"
+            ]
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "typed_payload": null,
+      "confidence": 1.0
+    },
+    {
+      "ordinal": 7,
+      "source_line_1based": 31,
+      "section_slug": "relay",
+      "heading_kind": "atx",
+      "heading_raw": "## RELAY",
+      "heading_normalized": "RELAY",
+      "outline": null,
+      "parent_section_slug": null,
+      "extractor_id": "generic_tables",
+      "body_markdown": "",
+      "tables": [],
+      "typed_payload": null,
+      "confidence": 0.0
+    },
+    {
+      "ordinal": 8,
+      "source_line_1based": 33,
+      "section_slug": "protection-testing",
+      "heading_kind": "numbered",
+      "heading_raw": "4.0 PROTECTION TESTING",
+      "heading_normalized": "PROTECTION TESTING",
+      "outline": [
+        4,
+        0
+      ],
+      "parent_section_slug": "transformer-testing",
+      "extractor_id": "generic_tables",
+      "body_markdown": "\n| X | Y |\n| - | - |\n| a | b |\n",
+      "tables": [
+        {
+          "headers": [
+            "X",
+            "Y"
+          ],
+          "rows": [
+            [
+              "a",
+              "b"
+            ]
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "typed_payload": null,
+      "confidence": 1.0
+    },
+    {
+      "ordinal": 9,
+      "source_line_1based": 39,
+      "section_slug": "short-circuit",
+      "heading_kind": "list",
+      "heading_raw": "- 4.2 SHORT CIRCUIT",
+      "heading_normalized": "SHORT CIRCUIT",
+      "outline": [
+        4,
+        2
+      ],
+      "parent_section_slug": "transformer-testing",
+      "extractor_id": "generic_tables",
+      "body_markdown": "\n| M | N |\n| - | - |\n| 1 | 2 |\n",
+      "tables": [
+        {
+          "headers": [
+            "M",
+            "N"
+          ],
+          "rows": [
+            [
+              "1",
+              "2"
+            ]
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "typed_payload": null,
+      "confidence": 1.0
+    },
+    {
+      "ordinal": 10,
+      "source_line_1based": 45,
+      "section_slug": "generic-footer-section",
+      "heading_kind": "caps",
+      "heading_raw": "GENERIC FOOTER SECTION",
+      "heading_normalized": "GENERIC FOOTER SECTION",
+      "outline": null,
+      "parent_section_slug": null,
+      "extractor_id": "generic_tables",
+      "body_markdown": "\n| A | B |\n| - | - |\n| 1 | 2 |",
+      "tables": [
+        {
+          "headers": [
+            "A",
+            "B"
+          ],
+          "rows": [
+            [
+              "1",
+              "2"
+            ]
+          ],
+          "confidence": 1.0
+        }
+      ],
+      "typed_payload": null,
+      "confidence": 1.0
+    }
+  ]
+}
