@@ -50,6 +50,8 @@ GENERIC FOOTER SECTION
 | 1 | 2 |
 """
         b = process_motor_feeder_markdown(md)
+        self.assertIsNotNone(b.audit_synthesis)
+        self.assertIn(b.audit_synthesis.overall_status, ("PASS", "WARN", "FAIL", "REVIEW"))
         by_slug = {s.section_slug: s for s in b.sections}
         self.assertIn("contact-resistance-test", by_slug)
         self.assertEqual(by_slug["contact-resistance-test"].extractor_id, "contact_resistance")

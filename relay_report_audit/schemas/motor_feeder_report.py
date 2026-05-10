@@ -6,6 +6,8 @@ from __future__ import annotations
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from relay_report_audit.schemas.audit_synthesis import AuditSynthesisResult
+
 
 class MotorFeederSectionRecord(BaseModel):
     """One processed section between consecutive report headers."""
@@ -36,6 +38,10 @@ class MotorFeederReportBundle(BaseModel):
 
     source_line_count: int = Field(ge=0)
     sections: list[MotorFeederSectionRecord] = Field(default_factory=list)
+    audit_synthesis: AuditSynthesisResult | None = Field(
+        default=None,
+        description="Deterministic document audit rollup (same shape as ReportDocumentJson).",
+    )
 
 
 __all__ = ["MotorFeederReportBundle", "MotorFeederSectionRecord"]

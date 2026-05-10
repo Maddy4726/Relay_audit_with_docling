@@ -66,7 +66,11 @@ def process_motor_feeder_markdown(
         json_indent=json_indent,
     )
     sections = [_to_motor_record(s) for s in doc.sections]
-    return MotorFeederReportBundle(source_line_count=doc.markdown_line_count, sections=sections)
+    return MotorFeederReportBundle(
+        source_line_count=doc.markdown_line_count,
+        sections=sections,
+        audit_synthesis=doc.audit_synthesis,
+    )
 
 
 def process_motor_feeder_markdown_dict(

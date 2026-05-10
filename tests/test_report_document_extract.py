@@ -64,6 +64,9 @@ TRANSFORMER TESTING
             data = json.loads(path.read_text(encoding="utf-8"))
             self.assertEqual(data["markdown_line_count"], doc.markdown_line_count)
             self.assertEqual(len(data["sections"]), len(doc.sections))
+            self.assertIn("audit_synthesis", data)
+            self.assertIsNotNone(data["audit_synthesis"])
+            self.assertIn("overall_status", data["audit_synthesis"])
 
     def test_build_report_document_to_json_file_default_dir(self) -> None:
         md = "## ONE\n\n## TWO\n"

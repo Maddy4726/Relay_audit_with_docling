@@ -11,6 +11,8 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from relay_report_audit.schemas.audit_synthesis import AuditSynthesisResult
+
 
 HeadingKind = Literal["atx", "list", "numbered", "caps", "preamble"]
 
@@ -74,6 +76,10 @@ class ReportDocumentJson(BaseModel):
 
     markdown_line_count: int = Field(ge=0)
     sections: list[ReportSectionJson] = Field(default_factory=list)
+    audit_synthesis: AuditSynthesisResult | None = Field(
+        default=None,
+        description="Document-level rollup from ``synthesize_report_audit`` (PASS/WARN/FAIL/REVIEW).",
+    )
 
 
 __all__ = ["ReportDocumentJson", "ReportSectionJson", "SectionTableData"]

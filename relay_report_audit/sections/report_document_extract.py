@@ -10,6 +10,7 @@ import re
 from pathlib import Path
 from typing import Final
 
+from relay_report_audit.audit.aggregation import synthesize_report_audit
 from relay_report_audit.schemas.report_document import (
     ReportDocumentJson,
     ReportSectionJson,
@@ -366,7 +367,8 @@ def build_report_document(
             built[-1].extractor_id,
         )
 
-    doc = ReportDocumentJson(markdown_line_count=n, sections=built)
+    synth = synthesize_report_audit(built)
+    doc = ReportDocumentJson(markdown_line_count=n, sections=built, audit_synthesis=synth)
     if json_dir is not None:
         destination = _resolve_json_output_path(
             json_dir,
