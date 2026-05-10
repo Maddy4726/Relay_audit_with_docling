@@ -19,3 +19,7 @@ env/
 # Generated Docling Markdown (keep directory placeholder)
 extracted/markdown/*
 !extracted/markdown/.gitkeep
+
+# Generated per-heading report JSON
+extracted/report_json/*
+!extracted/report_json/.gitkeep

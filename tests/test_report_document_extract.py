@@ -1,10 +1,16 @@
-"""Tests for ``build_report_document`` JSON (outline + parent)."""
+"""Tests for ``build_report_document`` JSON (outline + parent) and on-disk JSON."""
 
 from __future__ import annotations
 
+import json
+import tempfile
 import unittest
+from pathlib import Path
 
-from relay_report_audit.sections.report_document_extract import build_report_document
+from relay_report_audit.sections.report_document_extract import (
+    build_report_document,
+    build_report_document_to_json_file,
+)
 
 
 class TestReportDocumentExtract(unittest.TestCase):
@@ -47,6 +53,24 @@ TRANSFORMER TESTING
         child = next(s for s in doc.sections if s.outline == [4, 2])
         parent = next(s for s in doc.sections if s.outline == [4])
         self.assertEqual(child.parent_section_slug, parent.section_slug)
+
+    def test_json_written_when_json_dir_set(self) -> None:
+        md = "# A\n\n|x|y|\n|-|-|\n|1|2|\n"
+        with tempfile.TemporaryDirectory() as tmp:
+            tdir = Path(tmp)
+            doc = build_report_document(md, json_dir=tdir, json_stem="sample")
+            path = tdir / "sample.json"
+            self.assertTrue(path.is_file())
+            data = json.loads(path.read_text(encoding="utf-8"))
+            self.assertEqual(data["markdown_line_count"], doc.markdown_line_count)
+            self.assertEqual(len(data["sections"]), len(doc.sections))
+
+    def test_build_report_document_to_json_file_default_dir(self) -> None:
+        md = "## ONE\n\n## TWO\n"
+        with tempfile.TemporaryDirectory() as tmp:
+            _doc, path = build_report_document_to_json_file(md, json_dir=tmp, json_stem="out")
+            self.assertEqual(path.name, "out.json")
+            self.assertTrue(path.is_file())
 
 
 if __name__ == "__main__":

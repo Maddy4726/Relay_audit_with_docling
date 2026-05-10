@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import logging
 import re
+from pathlib import Path
 from typing import Final
 
 from relay_report_audit.schemas.report_document import (
@@ -32,6 +33,53 @@ logger = logging.getLogger(__name__)
 
 _CONTACT_RES_NORM: Final[str] = "CONTACT RESISTANCE TEST"
 _CAPS_LINE_RE = re.compile(r"^[A-Z0-9\s,.:/&()'\-]{6,}$")
+_DEFAULT_JSON_SUBDIR: Final[str] = "extracted/report_json"
+_FORBIDDEN_FILENAME_CHARS: Final[frozenset[str]] = frozenset('<>:"/\\|?*\n\r\t')
+
+
+def default_report_json_dir() -> Path:
+    """Default directory for persisted ``ReportDocumentJson`` files (under cwd unless absolute)."""
+    return Path(_DEFAULT_JSON_SUBDIR).resolve()
+
+
+def _sanitize_json_stem(stem: str) -> str:
+    cleaned = "".join("_" if ch in _FORBIDDEN_FILENAME_CHARS else ch for ch in stem)
+    cleaned = cleaned.strip().rstrip(".")
+    return (cleaned[:200] if cleaned else "report_sections")
+
+
+def _resolve_json_output_path(
+    json_dir: str | Path,
+    *,
+    output_filename: str | Path | None,
+    json_stem: str | None,
+) -> Path:
+    base = Path(json_dir).expanduser().resolve()
+    if output_filename is not None:
+        p = Path(output_filename)
+        if p.is_absolute():
+            return p
+        name = p.name
+        if not name.lower().endswith(".json"):
+            name = f"{name}.json"
+        return base / name
+    stem = _sanitize_json_stem(json_stem or "report_sections")
+    return base / f"{stem}.json"
+
+
+def write_report_document_json_file(
+    doc: ReportDocumentJson,
+    path: str | Path,
+    *,
+    indent: int = 2,
+) -> Path:
+    """Serialize ``doc`` to UTF-8 JSON; create parent directories as needed."""
+    out = Path(path).expanduser().resolve()
+    out.parent.mkdir(parents=True, exist_ok=True)
+    payload = doc.model_dump_json(indent=indent)
+    out.write_text(payload + "\n", encoding="utf-8")
+    logger.info("Wrote report JSON (%d sections) to %s", len(doc.sections), out)
+    return out
 
 
 def _parse_numbered_prose_heading(line: str) -> str | None:
@@ -165,9 +213,19 @@ def _tables_models(tdicts: list[dict]) -> list[SectionTableData]:
     return out
 
 
-def build_report_document(markdown: str) -> ReportDocumentJson:
+def build_report_document(
+    markdown: str,
+    *,
+    json_dir: str | Path | None = None,
+    output_filename: str | Path | None = None,
+    json_stem: str | None = None,
+    json_indent: int = 2,
+) -> ReportDocumentJson:
     """
     Produce one ``ReportSectionJson`` per detected heading, with parent/outline metadata.
+
+    When ``json_dir`` is set, the same model is written as UTF-8 JSON under that directory
+    (default filename ``report_sections.json``, or ``json_stem`` / ``output_filename``).
 
     Parent assignment (deterministic, no LLM):
 
@@ -284,14 +342,67 @@ def build_report_document(markdown: str) -> ReportDocumentJson:
             built[-1].extractor_id,
         )
 
-    return ReportDocumentJson(markdown_line_count=n, sections=built)
+    doc = ReportDocumentJson(markdown_line_count=n, sections=built)
+    if json_dir is not None:
+        destination = _resolve_json_output_path(
+            json_dir,
+            output_filename=output_filename,
+            json_stem=json_stem,
+        )
+        write_report_document_json_file(doc, destination, indent=json_indent)
+    return doc
 
 
-def build_report_document_dict(markdown: str) -> dict:
-    return build_report_document(markdown).model_dump()
+def build_report_document_to_json_file(
+    markdown: str,
+    *,
+    json_dir: str | Path | None = None,
+    output_filename: str | Path | None = None,
+    json_stem: str | None = None,
+    json_indent: int = 2,
+) -> tuple[ReportDocumentJson, Path]:
+    """
+    Build the report document and persist JSON under ``extracted/report_json/`` by default.
+
+    Returns the model and the path written.
+    """
+    base = default_report_json_dir() if json_dir is None else json_dir
+    doc = build_report_document(
+        markdown,
+        json_dir=base,
+        output_filename=output_filename,
+        json_stem=json_stem,
+        json_indent=json_indent,
+    )
+    path = _resolve_json_output_path(
+        Path(base).expanduser().resolve(),
+        output_filename=output_filename,
+        json_stem=json_stem,
+    )
+    return doc, path
+
+
+def build_report_document_dict(
+    markdown: str,
+    *,
+    json_dir: str | Path | None = None,
+    output_filename: str | Path | None = None,
+    json_stem: str | None = None,
+    json_indent: int = 2,
+) -> dict:
+    return build_report_document(
+        markdown,
+        json_dir=json_dir,
+        output_filename=output_filename,
+        json_stem=json_stem,
+        json_indent=json_indent,
+    ).model_dump()
 
 
 __all__ = [
     "build_report_document",
     "build_report_document_dict",
+    "build_report_document_to_json_file",
+    "default_report_json_dir",
+    "write_report_document_json_file",
 ]

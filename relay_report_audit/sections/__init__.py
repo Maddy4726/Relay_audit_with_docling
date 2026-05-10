@@ -9,6 +9,9 @@ __all__ = [
     "SectionTable",
     "build_report_document",
     "build_report_document_dict",
+    "build_report_document_to_json_file",
+    "default_report_json_dir",
+    "write_report_document_json_file",
     "extract_contact_resistance_from_markdown",
     "extract_contact_resistance_section_dict",
     "extract_ct_ratio_test_dict",
@@ -28,6 +31,9 @@ if TYPE_CHECKING:
     from relay_report_audit.sections.report_document_extract import (
         build_report_document,
         build_report_document_dict,
+        build_report_document_to_json_file,
+        default_report_json_dir,
+        write_report_document_json_file,
     )
     from relay_report_audit.sections.contact_resistance_extract import (
         extract_contact_resistance_from_markdown,
@@ -67,7 +73,13 @@ def __getattr__(name: str) -> Any:
         from relay_report_audit.sections import motor_feeder_report
 
         return getattr(motor_feeder_report, name)
-    if name in ("build_report_document", "build_report_document_dict"):
+    if name in (
+        "build_report_document",
+        "build_report_document_dict",
+        "build_report_document_to_json_file",
+        "default_report_json_dir",
+        "write_report_document_json_file",
+    ):
         from relay_report_audit.sections import report_document_extract
 
         return getattr(report_document_extract, name)

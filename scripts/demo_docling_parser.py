@@ -8,7 +8,9 @@ Usage (from repository root)::
     python scripts/demo_docling_parser.py path/to/report.pdf --markdown-dir /tmp/md_out
 
 Markdown is written next to the default layout under ``extracted/markdown/`` unless
-``--markdown-dir`` is set. Logging goes to stderr at INFO level.
+``--markdown-dir`` is set. A per-heading report JSON file is written under
+``extracted/report_json/`` unless ``--no-report-json`` is set. Logging goes to stderr at
+INFO level.
 """
 
 from __future__ import annotations
@@ -44,6 +46,23 @@ def main(argv: list[str] | None = None) -> int:
         default=None,
         help="Optional output .md filename (placed under markdown-dir if relative)",
     )
+    parser.add_argument(
+        "--no-report-json",
+        action="store_true",
+        help="Skip writing per-heading report JSON (default: write under --json-dir)",
+    )
+    parser.add_argument(
+        "--json-dir",
+        type=Path,
+        default=None,
+        help="Directory for report JSON (default: extracted/report_json under cwd)",
+    )
+    parser.add_argument(
+        "--json-stem",
+        type=str,
+        default=None,
+        help="Filename stem for report JSON (default: PDF basename without extension)",
+    )
     parser.add_argument("-v", "--verbose", action="store_true", help="Enable DEBUG logging")
     args = parser.parse_args(argv)
 
@@ -56,6 +75,10 @@ def main(argv: list[str] | None = None) -> int:
     from relay_report_audit.parsing.docling_parser import (  # noqa: E402
         DoclingPdfParseError,
         parse_pdf_to_markdown,
+    )
+    from relay_report_audit.sections.report_document_extract import (  # noqa: E402
+        build_report_document_to_json_file,
+        default_report_json_dir,
     )
 
     try:
@@ -76,6 +99,17 @@ def main(argv: list[str] | None = None) -> int:
 
     preview = text[:500] + ("…" if len(text) > 500 else "")
     logging.getLogger(__name__).info("Extracted %d characters. Preview:\n%s", len(text), preview)
+
+    if not args.no_report_json:
+        stem = args.json_stem or args.pdf.stem
+        json_base = args.json_dir if args.json_dir is not None else default_report_json_dir()
+        _doc, json_path = build_report_document_to_json_file(
+            text,
+            json_dir=json_base,
+            json_stem=stem,
+        )
+        logging.getLogger(__name__).info("Report JSON written to %s", json_path)
+
     return 0
 
 
