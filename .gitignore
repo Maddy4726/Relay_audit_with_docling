@@ -16,10 +16,6 @@ env/
 .idea/
 .vscode/
 
-# Generated Docling Markdown (keep directory placeholder)
-extracted/markdown/*
-!extracted/markdown/.gitkeep
-
-# Generated per-heading report JSON
-extracted/report_json/*
-!extracted/report_json/.gitkeep
+# Docling markdown and report JSON under extracted/ may be committed as reference
+# outputs. Ignore only obvious scratch files in that tree.
+extracted/**/*.tmp

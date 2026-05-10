@@ -1,0 +1,1127 @@
+{
+  "markdown_line_count": 208,
+  "sections": [
+    {
+      "ordinal": 0,
+      "source_line_1based": 1,
+      "section_slug": "preamble",
+      "heading_kind": "preamble",
+      "heading_raw": "__PREAMBLE__",
+      "heading_normalized": "PREAMBLE",
+      "outline": null,
+      "parent_section_slug": null,
+      "extractor_id": "preamble",
+      "body_markdown": "| SHAILJA                                   | TEST REPORT FOR MOTOR FEEDER              | SHEET : 1 OF 3    |\n|-------------------------------------------|-------------------------------------------|-------------------|\n| Enterprises                               |                                           | PAGE : 1          |\n| BHILAI STEEL PLANT ,BHILAI (Chhattisgarh) | BHILAI STEEL PLANT ,BHILAI (Chhattisgarh) | DATE : 30.04.2026 |\n",
+      "tables": [
+        {
+          "headers": [
+            "SHAILJA",
+            "TEST REPORT FOR MOTOR FEEDER",
+            "SHEET : 1 OF 3"
+          ],
+          "rows": [
+            [
+              "Enterprises",
+              "",
+              "PAGE : 1"
+            ],
+            [
+              "BHILAI STEEL PLANT ,BHILAI (Chhattisgarh)",
+              "BHILAI STEEL PLANT ,BHILAI (Chhattisgarh)",
+              "DATE : 30.04.2026"
+            ]
+          ],
+          "confidence": 1.0,
+          "header_depth": 1,
+          "grouped_headers": null
+        }
+      ],
+      "typed_payload": null,
+      "confidence": 1.0
+    },
+    {
+      "ordinal": 1,
+      "source_line_1based": 6,
+      "section_slug": "general",
+      "heading_kind": "numbered",
+      "heading_raw": "1. GENERAL",
+      "heading_normalized": "GENERAL",
+      "outline": [
+        1
+      ],
+      "parent_section_slug": null,
+      "extractor_id": "generic_tables",
+      "body_markdown": "\n| LOCATION- SUBSTATION: 31 CUBICAL NO. : 59 LCP   | LOCATION- SUBSTATION: 31 CUBICAL NO. : 59 LCP   |\n|-------------------------------------------------|-------------------------------------------------|\n| CB NO: 59                                       | FEEDER: DESCALING PUMP MOTOR - 1702 1750 KW     |\n",
+      "tables": [
+        {
+          "headers": [
+            "LOCATION- SUBSTATION: 31 CUBICAL NO. : 59 LCP",
+            "LOCATION- SUBSTATION: 31 CUBICAL NO. : 59 LCP"
+          ],
+          "rows": [
+            [
+              "CB NO: 59",
+              "FEEDER: DESCALING PUMP MOTOR - 1702 1750 KW"
+            ]
+          ],
+          "confidence": 1.0,
+          "header_depth": 1,
+          "grouped_headers": null
+        }
+      ],
+      "typed_payload": null,
+      "confidence": 1.0
+    },
+    {
+      "ordinal": 2,
+      "source_line_1based": 12,
+      "section_slug": "circuit-breaker",
+      "heading_kind": "atx",
+      "heading_raw": "## CIRCUIT BREAKER",
+      "heading_normalized": "CIRCUIT BREAKER",
+      "outline": null,
+      "parent_section_slug": null,
+      "extractor_id": "generic_tables",
+      "body_markdown": "",
+      "tables": [],
+      "typed_payload": null,
+      "confidence": 0.0
+    },
+    {
+      "ordinal": 3,
+      "source_line_1based": 14,
+      "section_slug": "name-plate-details",
+      "heading_kind": "list",
+      "heading_raw": "- 2.1 NAME PLATE DETAILS :-",
+      "heading_normalized": "NAME PLATE DETAILS",
+      "outline": [
+        2,
+        1
+      ],
+      "parent_section_slug": null,
+      "extractor_id": "generic_tables",
+      "body_markdown": "",
+      "tables": [],
+      "typed_payload": null,
+      "confidence": 0.0
+    },
+    {
+      "ordinal": 4,
+      "source_line_1based": 15,
+      "section_slug": "insulation-resistance-test-measured-values-in-g",
+      "heading_kind": "list",
+      "heading_raw": "- 2.2INSULATION RESISTANCE TEST : (MEASURED VALUES IN GΩ)",
+      "heading_normalized": "INSULATION RESISTANCE TEST : (MEASURED VALUES IN GΩ)",
+      "outline": [
+        2,
+        2
+      ],
+      "parent_section_slug": null,
+      "extractor_id": "generic_tables",
+      "body_markdown": "",
+      "tables": [],
+      "typed_payload": null,
+      "confidence": 0.0
+    },
+    {
+      "ordinal": 5,
+      "source_line_1based": 16,
+      "section_slug": "coil-resistance-test",
+      "heading_kind": "list",
+      "heading_raw": "- 2.3 COIL RESISTANCE TEST:",
+      "heading_normalized": "COIL RESISTANCE TEST",
+      "outline": [
+        2,
+        3
+      ],
+      "parent_section_slug": null,
+      "extractor_id": "generic_tables",
+      "body_markdown": "",
+      "tables": [],
+      "typed_payload": null,
+      "confidence": 0.0
+    },
+    {
+      "ordinal": 6,
+      "source_line_1based": 17,
+      "section_slug": "contact-resistance-test",
+      "heading_kind": "list",
+      "heading_raw": "- 2.4 CONTACT RESISTANCE TEST:",
+      "heading_normalized": "CONTACT RESISTANCE TEST",
+      "outline": [
+        2,
+        4
+      ],
+      "parent_section_slug": null,
+      "extractor_id": "contact_resistance",
+      "body_markdown": "\n| Make            | NGEF       |\n|-----------------|------------|\n| Type            | E7512/10   |\n| Sl. No.         | 4811240306 |\n| Rated Voltage   | 11 KV      |\n| Rated Current   | 1250 A     |\n| Control Voltage | 220 VDC    |\n\n| Reference     | Breaker Condition   |   Applied Voltage (V) | R phase   | Y phase   | B phase   |\n|---------------|---------------------|-----------------------|-----------|-----------|-----------|\n| Pole - Pole'  | Open                |                  5000 | >500      | >500      | >500      |\n| Phase - Phase | Close               |                  5000 | >500      | >500      | >500      |\n| Pole - Earth  | Close               |                  5000 | >500      | >500      | >500      |\n\n| Terminal Reference   | Measured Resistance in Ω   |\n|----------------------|----------------------------|\n| Closing coil         | 81.0                       |\n| Tripping Coil        | 0.478 K Ω                  |\n| Spring charge motor  | 12.6                       |\n\nApplied Current (100A)\n\n| Phase Ref.   |   Measured Resistance in Micro ohms |\n|--------------|-------------------------------------|\n| R            |                                96.9 |\n| Y            |                               120.0 |\n| B            |                                88.0 |\n",
+      "tables": [
+        {
+          "headers": [
+            "Make",
+            "NGEF"
+          ],
+          "rows": [
+            [
+              "Type",
+              "E7512/10"
+            ],
+            [
+              "Sl. No.",
+              "4811240306"
+            ],
+            [
+              "Rated Voltage",
+              "11 KV"
+            ],
+            [
+              "Rated Current",
+              "1250 A"
+            ],
+            [
+              "Control Voltage",
+              "220 VDC"
+            ]
+          ],
+          "confidence": 1.0,
+          "header_depth": 1,
+          "grouped_headers": null
+        },
+        {
+          "headers": [
+            "Reference",
+            "Breaker Condition",
+            "Applied Voltage (V)",
+            "R phase",
+            "Y phase",
+            "B phase"
+          ],
+          "rows": [
+            [
+              "Pole - Pole'",
+              "Open",
+              "5000",
+              ">500",
+              ">500",
+              ">500"
+            ],
+            [
+              "Phase - Phase",
+              "Close",
+              "5000",
+              ">500",
+              ">500",
+              ">500"
+            ],
+            [
+              "Pole - Earth",
+              "Close",
+              "5000",
+              ">500",
+              ">500",
+              ">500"
+            ]
+          ],
+          "confidence": 1.0,
+          "header_depth": 1,
+          "grouped_headers": null
+        },
+        {
+          "headers": [
+            "Terminal Reference",
+            "Measured Resistance in Ω"
+          ],
+          "rows": [
+            [
+              "Closing coil",
+              "81.0"
+            ],
+            [
+              "Tripping Coil",
+              "0.478 K Ω"
+            ],
+            [
+              "Spring charge motor",
+              "12.6"
+            ]
+          ],
+          "confidence": 1.0,
+          "header_depth": 1,
+          "grouped_headers": null
+        },
+        {
+          "headers": [
+            "Phase Ref.",
+            "Measured Resistance in Micro ohms"
+          ],
+          "rows": [
+            [
+              "R",
+              "96.9"
+            ],
+            [
+              "Y",
+              "120.0"
+            ],
+            [
+              "B",
+              "88.0"
+            ]
+          ],
+          "confidence": 1.0,
+          "header_depth": 1,
+          "grouped_headers": null
+        }
+      ],
+      "typed_payload": {
+        "section": "CONTACT RESISTANCE TEST",
+        "confidence": 1.0,
+        "measurements": [
+          {
+            "phase": "R",
+            "resistance_micro_ohm": 96.9
+          },
+          {
+            "phase": "Y",
+            "resistance_micro_ohm": 120.0
+          },
+          {
+            "phase": "B",
+            "resistance_micro_ohm": 88.0
+          }
+        ]
+      },
+      "confidence": 1.0
+    },
+    {
+      "ordinal": 7,
+      "source_line_1based": 47,
+      "section_slug": "time-interval-test",
+      "heading_kind": "list",
+      "heading_raw": "- 2.5 TIME INTERVAL TEST:",
+      "heading_normalized": "TIME INTERVAL TEST",
+      "outline": [
+        2,
+        5
+      ],
+      "parent_section_slug": null,
+      "extractor_id": "generic_tables",
+      "body_markdown": "\n|                | Measured Time in milli Seconds   | Measured Time in milli Seconds   | Measured Time in milli Seconds   |\n|----------------|----------------------------------|----------------------------------|----------------------------------|\n| Operation Ref. | R                                | Y                                | B                                |\n| Close          | 85                               | 85                               | 85                               |\n| Open           | 54                               | 54                               | 54                               |\n| Close - Open   | 50                               | 50                               | 50                               |\n",
+      "tables": [
+        {
+          "headers": [
+            "",
+            "Measured Time in milli Seconds",
+            "Measured Time in milli Seconds",
+            "Measured Time in milli Seconds"
+          ],
+          "rows": [
+            [
+              "Operation Ref.",
+              "R",
+              "Y",
+              "B"
+            ],
+            [
+              "Close",
+              "85",
+              "85",
+              "85"
+            ],
+            [
+              "Open",
+              "54",
+              "54",
+              "54"
+            ],
+            [
+              "Close - Open",
+              "50",
+              "50",
+              "50"
+            ]
+          ],
+          "confidence": 1.0,
+          "header_depth": 1,
+          "grouped_headers": null
+        }
+      ],
+      "typed_payload": null,
+      "confidence": 1.0
+    },
+    {
+      "ordinal": 8,
+      "source_line_1based": 56,
+      "section_slug": "current-transformer",
+      "heading_kind": "caps",
+      "heading_raw": "CURRENT TRANSFORMER",
+      "heading_normalized": "CURRENT TRANSFORMER",
+      "outline": null,
+      "parent_section_slug": null,
+      "extractor_id": "generic_tables",
+      "body_markdown": "",
+      "tables": [],
+      "typed_payload": null,
+      "confidence": 0.0
+    },
+    {
+      "ordinal": 9,
+      "source_line_1based": 58,
+      "section_slug": "ratio-test-by-primary-injection",
+      "heading_kind": "numbered",
+      "heading_raw": "3. RATIO TEST: (BY PRIMARY INJECTION)",
+      "heading_normalized": "RATIO TEST: (BY PRIMARY INJECTION)",
+      "outline": [
+        3
+      ],
+      "parent_section_slug": null,
+      "extractor_id": "ct_ratio",
+      "body_markdown": "",
+      "tables": [],
+      "typed_payload": {
+        "section": "CT RATIO TEST",
+        "ct_ratio": "",
+        "confidence": 0.0,
+        "measurements": []
+      },
+      "confidence": 0.0
+    },
+    {
+      "ordinal": 10,
+      "source_line_1based": 59,
+      "section_slug": "3-1-ct-ctr-150-5-a",
+      "heading_kind": "numbered",
+      "heading_raw": "2. 3.1 CT (CTR:    150  /  5  A)",
+      "heading_normalized": "3.1 CT (CTR: 150 / 5 A)",
+      "outline": [
+        2
+      ],
+      "parent_section_slug": null,
+      "extractor_id": "ct_ratio",
+      "body_markdown": "\n|            |                                 | Measured current in Secondary ( A )   | Measured current in Secondary ( A )   | Measured current in Secondary ( A )   | Measured current in Secondary ( A )   |\n|------------|---------------------------------|---------------------------------------|---------------------------------------|---------------------------------------|---------------------------------------|\n| Phase Ref. | Injected current in Primary (A) | RELAY                                 | ENERGY METER                          | ICT                                   | AMMETER                               |\n| R          | 150                             | 150                                   | -                                     | -                                     | 150                                   |\n| Y          | -                               | 150                                   | -                                     | -                                     | -                                     |\n| B          | 150                             | 150                                   | -                                     | -                                     | 150                                   |\n\n| REFERENCE   | TESTED BY:- M/S. SHAILJA ENTERPRISES   | VERIFIED BY M/S. BHILAI STEEL PLANT   |\n|-------------|----------------------------------------|---------------------------------------|\n| NAME        | Mr. SHUBHAM R. SINGH                   | Mr.                                   |\n| SIGNATURE   |                                        |                                       |\n\n| SHAILJA Enterprises                       | TEST REPORT FOR MOTOR FEEDER              | SHEET : 2 OF 3    |\n|-------------------------------------------|-------------------------------------------|-------------------|\n|                                           |                                           | PAGE : 2          |\n| BHILAI STEEL PLANT ,BHILAI (Chhattisgarh) | BHILAI STEEL PLANT ,BHILAI (Chhattisgarh) | DATE : 30.04.2026 |\n",
+      "tables": [
+        {
+          "headers": [
+            "",
+            "",
+            "Measured current in Secondary ( A )",
+            "Measured current in Secondary ( A )",
+            "Measured current in Secondary ( A )",
+            "Measured current in Secondary ( A )"
+          ],
+          "rows": [
+            [
+              "Phase Ref.",
+              "Injected current in Primary (A)",
+              "RELAY",
+              "ENERGY METER",
+              "ICT",
+              "AMMETER"
+            ],
+            [
+              "R",
+              "150",
+              "150",
+              "-",
+              "-",
+              "150"
+            ],
+            [
+              "Y",
+              "-",
+              "150",
+              "-",
+              "-",
+              "-"
+            ],
+            [
+              "B",
+              "150",
+              "150",
+              "-",
+              "-",
+              "150"
+            ]
+          ],
+          "confidence": 1.0,
+          "header_depth": 1,
+          "grouped_headers": null
+        },
+        {
+          "headers": [
+            "REFERENCE",
+            "TESTED BY:- M/S. SHAILJA ENTERPRISES",
+            "VERIFIED BY M/S. BHILAI STEEL PLANT"
+          ],
+          "rows": [
+            [
+              "NAME",
+              "Mr. SHUBHAM R. SINGH",
+              "Mr."
+            ],
+            [
+              "SIGNATURE",
+              "",
+              ""
+            ]
+          ],
+          "confidence": 1.0,
+          "header_depth": 1,
+          "grouped_headers": null
+        },
+        {
+          "headers": [
+            "SHAILJA Enterprises",
+            "TEST REPORT FOR MOTOR FEEDER",
+            "SHEET : 2 OF 3"
+          ],
+          "rows": [
+            [
+              "",
+              "",
+              "PAGE : 2"
+            ],
+            [
+              "BHILAI STEEL PLANT ,BHILAI (Chhattisgarh)",
+              "BHILAI STEEL PLANT ,BHILAI (Chhattisgarh)",
+              "DATE : 30.04.2026"
+            ]
+          ],
+          "confidence": 1.0,
+          "header_depth": 1,
+          "grouped_headers": null
+        }
+      ],
+      "typed_payload": {
+        "section": "CT RATIO TEST",
+        "ct_ratio": "150/5",
+        "confidence": 0.96,
+        "measurements": [
+          {
+            "phase": "R",
+            "primary_current": 150.0,
+            "relay_secondary_current": 150.0,
+            "ammeter_secondary_current": 150.0
+          },
+          {
+            "phase": "B",
+            "primary_current": 150.0,
+            "relay_secondary_current": 150.0,
+            "ammeter_secondary_current": 150.0
+          }
+        ]
+      },
+      "confidence": 0.96
+    },
+    {
+      "ordinal": 11,
+      "source_line_1based": 78,
+      "section_slug": "cbct-ratio-50-1-a",
+      "heading_kind": "numbered",
+      "heading_raw": "3.2 CBCT (RATIO:    50  /   1 A)",
+      "heading_normalized": "CBCT (RATIO: 50 / 1 A)",
+      "outline": [
+        3,
+        2
+      ],
+      "parent_section_slug": "ratio-test-by-primary-injection",
+      "extractor_id": "ct_ratio",
+      "body_markdown": "\n|   Injected current in Primary (A) |   Measured current in Secondary (mA) |\n|-----------------------------------|--------------------------------------|\n|                                10 |                                212.0 |\n",
+      "tables": [
+        {
+          "headers": [
+            "Injected current in Primary (A)",
+            "Measured current in Secondary (mA)"
+          ],
+          "rows": [
+            [
+              "10",
+              "212.0"
+            ]
+          ],
+          "confidence": 1.0,
+          "header_depth": 1,
+          "grouped_headers": null
+        }
+      ],
+      "typed_payload": {
+        "section": "CT RATIO TEST",
+        "ct_ratio": "50/1",
+        "confidence": 0.6025,
+        "measurements": [],
+        "tables_fallback": [
+          {
+            "section": "cbct-ratio-50-1-a",
+            "confidence": 1.0,
+            "headers": [
+              "Injected current in Primary (A)",
+              "Measured current in Secondary (mA)"
+            ],
+            "rows": [
+              [
+                "10",
+                "212.0"
+              ]
+            ],
+            "header_depth": 1
+          }
+        ]
+      },
+      "confidence": 1.0
+    },
+    {
+      "ordinal": 12,
+      "source_line_1based": 84,
+      "section_slug": "relay-testing",
+      "heading_kind": "caps",
+      "heading_raw": "RELAY TESTING",
+      "heading_normalized": "RELAY TESTING",
+      "outline": null,
+      "parent_section_slug": null,
+      "extractor_id": "generic_tables",
+      "body_markdown": "\n| MAKE    | MICOM    |\n|---------|----------|\n| MODEL   | P132     |\n| SL. NO. | 30054248 |\n",
+      "tables": [
+        {
+          "headers": [
+            "MAKE",
+            "MICOM"
+          ],
+          "rows": [
+            [
+              "MODEL",
+              "P132"
+            ],
+            [
+              "SL. NO.",
+              "30054248"
+            ]
+          ],
+          "confidence": 1.0,
+          "header_depth": 1,
+          "grouped_headers": null
+        }
+      ],
+      "typed_payload": null,
+      "confidence": 1.0
+    },
+    {
+      "ordinal": 13,
+      "source_line_1based": 91,
+      "section_slug": "protection-testing-by-secondary-injection-4-1-measurements",
+      "heading_kind": "numbered",
+      "heading_raw": "4.0 PROTECTION TESTING ( BY SECONDARY INJECTION) 4.1  MEASUREMENTS:-",
+      "heading_normalized": "PROTECTION TESTING ( BY SECONDARY INJECTION) 4.1 MEASUREMENTS",
+      "outline": [
+        4,
+        0
+      ],
+      "parent_section_slug": "relay-testing",
+      "extractor_id": "generic_tables",
+      "body_markdown": "\n| REF   |   INJECTED (A) |   MEASURED(A) IN RELAY |\n|-------|----------------|------------------------|\n| R     |              5 |                    150 |\n| Y     |              5 |                    150 |\n| B     |              5 |                    150 |\n",
+      "tables": [
+        {
+          "headers": [
+            "REF",
+            "INJECTED (A)",
+            "MEASURED(A) IN RELAY"
+          ],
+          "rows": [
+            [
+              "R",
+              "5",
+              "150"
+            ],
+            [
+              "Y",
+              "5",
+              "150"
+            ],
+            [
+              "B",
+              "5",
+              "150"
+            ]
+          ],
+          "confidence": 1.0,
+          "header_depth": 1,
+          "grouped_headers": null
+        }
+      ],
+      "typed_payload": null,
+      "confidence": 1.0
+    },
+    {
+      "ordinal": 14,
+      "source_line_1based": 99,
+      "section_slug": "short-circuit-dtoc",
+      "heading_kind": "numbered",
+      "heading_raw": "4.2 SHORT CIRCUIT: (DTOC)",
+      "heading_normalized": "SHORT CIRCUIT: (DTOC)",
+      "outline": [
+        4,
+        2
+      ],
+      "parent_section_slug": "relay-testing",
+      "extractor_id": "generic_tables",
+      "body_markdown": "\nSet Current =    9.00 x In Delay =      0.08   mSec\n\n|   Phase |   Injected Current (A) | Operated Time (Sec)   |\n|---------|------------------------|-----------------------|\n|    45.0 |                  0.138 | RYB                   |\n",
+      "tables": [
+        {
+          "headers": [
+            "Phase",
+            "Injected Current (A)",
+            "Operated Time (Sec)"
+          ],
+          "rows": [
+            [
+              "45.0",
+              "0.138",
+              "RYB"
+            ]
+          ],
+          "confidence": 1.0,
+          "header_depth": 1,
+          "grouped_headers": null
+        }
+      ],
+      "typed_payload": null,
+      "confidence": 1.0
+    },
+    {
+      "ordinal": 15,
+      "source_line_1based": 107,
+      "section_slug": "thermal-o-l",
+      "heading_kind": "numbered",
+      "heading_raw": "4.3 THERMAL O/L:",
+      "heading_normalized": "THERMAL O/L",
+      "outline": [
+        4,
+        3
+      ],
+      "parent_section_slug": "relay-testing",
+      "extractor_id": "generic_tables",
+      "body_markdown": "\nSet Current =   0.71 x In Time const.=     11.8    min\n\n| Phase   |   Injected Current (A) |   Calculated Time (Sec) |   Operated Time (Sec) |\n|---------|------------------------|-------------------------|-----------------------|\n| RYB     |                   21.3 |                   19.94 |                19.751 |\n",
+      "tables": [
+        {
+          "headers": [
+            "Phase",
+            "Injected Current (A)",
+            "Calculated Time (Sec)",
+            "Operated Time (Sec)"
+          ],
+          "rows": [
+            [
+              "RYB",
+              "21.3",
+              "19.94",
+              "19.751"
+            ]
+          ],
+          "confidence": 1.0,
+          "header_depth": 1,
+          "grouped_headers": null
+        }
+      ],
+      "typed_payload": null,
+      "confidence": 1.0
+    },
+    {
+      "ordinal": 16,
+      "source_line_1based": 115,
+      "section_slug": "negative-sequence-dtoc",
+      "heading_kind": "numbered",
+      "heading_raw": "4.4 NEGATIVE SEQUENCE:(DTOC)",
+      "heading_normalized": "NEGATIVE SEQUENCE:(DTOC)",
+      "outline": [
+        4,
+        4
+      ],
+      "parent_section_slug": "relay-testing",
+      "extractor_id": "generic_tables",
+      "body_markdown": "\nSTAGE 1: Set Current =   2.47    x In      CURVE: DT          Delay = 1.00 Sec\n\n|   Phase |   Injected Current (A) | Operated Time (Sec)   |\n|---------|------------------------|-----------------------|\n|   12.35 |                  1.057 | RYB                   |\n\nIDMT STAGE 2: Set Current =    0.21    x In       CURVE:  SI         TMS =    0.34\n\n| Phase   | Injected Current (A)   | Injected Current (A)   | Injected Current (A)   | Operated Time (Sec)   | Operated Time (Sec)   | Operated Time (Sec)   |\n|---------|------------------------|------------------------|------------------------|-----------------------|-----------------------|-----------------------|\n| Phase   | X2                     | X4                     | X6                     | X2                    | X4                    | X6                    |\n| RYB     | 2.1                    | 4.2                    | 6.3                    | 3.491                 | 1.736                 | 1.336                 |\n",
+      "tables": [
+        {
+          "headers": [
+            "Phase",
+            "Injected Current (A)",
+            "Operated Time (Sec)"
+          ],
+          "rows": [
+            [
+              "12.35",
+              "1.057",
+              "RYB"
+            ]
+          ],
+          "confidence": 1.0,
+          "header_depth": 1,
+          "grouped_headers": null
+        },
+        {
+          "headers": [
+            "Phase",
+            "Injected Current (A)",
+            "Injected Current (A)",
+            "Injected Current (A)",
+            "Operated Time (Sec)",
+            "Operated Time (Sec)",
+            "Operated Time (Sec)"
+          ],
+          "rows": [
+            [
+              "Phase",
+              "X2",
+              "X4",
+              "X6",
+              "X2",
+              "X4",
+              "X6"
+            ],
+            [
+              "RYB",
+              "2.1",
+              "4.2",
+              "6.3",
+              "3.491",
+              "1.736",
+              "1.336"
+            ]
+          ],
+          "confidence": 1.0,
+          "header_depth": 1,
+          "grouped_headers": null
+        }
+      ],
+      "typed_payload": null,
+      "confidence": 1.0
+    },
+    {
+      "ordinal": 17,
+      "source_line_1based": 130,
+      "section_slug": "prolonged-start-startup-supervision-mp",
+      "heading_kind": "numbered",
+      "heading_raw": "4.5 PROLONGED START/ STARTUP SUPERVISION: MP",
+      "heading_normalized": "PROLONGED START/ STARTUP SUPERVISION: MP",
+      "outline": [
+        4,
+        5
+      ],
+      "parent_section_slug": "relay-testing",
+      "extractor_id": "generic_tables",
+      "body_markdown": "\nSet Current =  0.71  x  In, Motor St. Current=   2.5 x In A, Time St. Up =  10 Sec\n\n|   Phase |   Injected Current (A) | Operated Time (Sec)   |\n|---------|------------------------|-----------------------|\n|    12.5 |                 10.068 | RYB                   |\n",
+      "tables": [
+        {
+          "headers": [
+            "Phase",
+            "Injected Current (A)",
+            "Operated Time (Sec)"
+          ],
+          "rows": [
+            [
+              "12.5",
+              "10.068",
+              "RYB"
+            ]
+          ],
+          "confidence": 1.0,
+          "header_depth": 1,
+          "grouped_headers": null
+        }
+      ],
+      "typed_payload": null,
+      "confidence": 1.0
+    },
+    {
+      "ordinal": 18,
+      "source_line_1based": 138,
+      "section_slug": "stall-during-running-dtoc",
+      "heading_kind": "numbered",
+      "heading_raw": "4.6 STALL DURING RUNNING: (DTOC)",
+      "heading_normalized": "STALL DURING RUNNING: (DTOC)",
+      "outline": [
+        4,
+        6
+      ],
+      "parent_section_slug": "relay-testing",
+      "extractor_id": "generic_tables",
+      "body_markdown": "\nSet Current =   1.43   x In, Logic Delay time =   12  Sec\n\n|   Phase |   Injected Current (A) | Operated Time (Sec)   |\n|---------|------------------------|-----------------------|\n|    10.0 |                 10.041 | RYB                   |\n\n| REFERENCE   | TESTED BY:- M/S. SHAILJA ENTERPRISES   | VERIFIED BY M/S. BHILAI STEEL PLANT   |\n|-------------|----------------------------------------|---------------------------------------|\n| NAME        | Mr. SHUBHAM R. SINGH                   | Mr.                                   |\n| SIGNATURE   |                                        |                                       |\n",
+      "tables": [
+        {
+          "headers": [
+            "Phase",
+            "Injected Current (A)",
+            "Operated Time (Sec)"
+          ],
+          "rows": [
+            [
+              "10.0",
+              "10.041",
+              "RYB"
+            ]
+          ],
+          "confidence": 1.0,
+          "header_depth": 1,
+          "grouped_headers": null
+        },
+        {
+          "headers": [
+            "REFERENCE",
+            "TESTED BY:- M/S. SHAILJA ENTERPRISES",
+            "VERIFIED BY M/S. BHILAI STEEL PLANT"
+          ],
+          "rows": [
+            [
+              "NAME",
+              "Mr. SHUBHAM R. SINGH",
+              "Mr."
+            ],
+            [
+              "SIGNATURE",
+              "",
+              ""
+            ]
+          ],
+          "confidence": 1.0,
+          "header_depth": 1,
+          "grouped_headers": null
+        }
+      ],
+      "typed_payload": null,
+      "confidence": 1.0
+    },
+    {
+      "ordinal": 19,
+      "source_line_1based": 151,
+      "section_slug": "shailja-enterprises",
+      "heading_kind": "atx",
+      "heading_raw": "## SHAILJA Enterprises",
+      "heading_normalized": "SHAILJA ENTERPRISES",
+      "outline": null,
+      "parent_section_slug": null,
+      "extractor_id": "generic_tables",
+      "body_markdown": "",
+      "tables": [],
+      "typed_payload": null,
+      "confidence": 0.0
+    },
+    {
+      "ordinal": 20,
+      "source_line_1based": 153,
+      "section_slug": "test-report-for-motor-feeder",
+      "heading_kind": "atx",
+      "heading_raw": "## TEST REPORT FOR MOTOR FEEDER",
+      "heading_normalized": "TEST REPORT FOR MOTOR FEEDER",
+      "outline": null,
+      "parent_section_slug": null,
+      "extractor_id": "generic_tables",
+      "body_markdown": "",
+      "tables": [],
+      "typed_payload": null,
+      "confidence": 0.0
+    },
+    {
+      "ordinal": 21,
+      "source_line_1based": 155,
+      "section_slug": "bhilai-steel-plant-bhilai-chhattisgarh",
+      "heading_kind": "atx",
+      "heading_raw": "## BHILAI STEEL PLANT ,BHILAI (Chhattisgarh)",
+      "heading_normalized": "BHILAI STEEL PLANT ,BHILAI (CHHATTISGARH)",
+      "outline": null,
+      "parent_section_slug": null,
+      "extractor_id": "generic_tables",
+      "body_markdown": "",
+      "tables": [],
+      "typed_payload": null,
+      "confidence": 0.0
+    },
+    {
+      "ordinal": 22,
+      "source_line_1based": 157,
+      "section_slug": "4-7-earth-fault-protection-e-f-operated-through-cbct",
+      "heading_kind": "atx",
+      "heading_raw": "## 4.7 EARTH FAULT PROTECTION (E/F): OPERATED THROUGH CBCT",
+      "heading_normalized": "4.7 EARTH FAULT PROTECTION (E/F): OPERATED THROUGH CBCT",
+      "outline": null,
+      "parent_section_slug": null,
+      "extractor_id": "generic_tables",
+      "body_markdown": "\nSet Current =      0.040     x In A\n\nTime =     0.50   Sec\n\n| Phase   |   Injected Current (A) | Operated Time (Sec)   |\n|---------|------------------------|-----------------------|\n| Io      |                    1.9 | Operated              |\n",
+      "tables": [
+        {
+          "headers": [
+            "Phase",
+            "Injected Current (A)",
+            "Operated Time (Sec)"
+          ],
+          "rows": [
+            [
+              "Io",
+              "1.9",
+              "Operated"
+            ]
+          ],
+          "confidence": 1.0,
+          "header_depth": 1,
+          "grouped_headers": null
+        }
+      ],
+      "typed_payload": null,
+      "confidence": 1.0
+    },
+    {
+      "ordinal": 23,
+      "source_line_1based": 167,
+      "section_slug": "5-0-final-checks",
+      "heading_kind": "atx",
+      "heading_raw": "## 5.0 FINAL CHECKS",
+      "heading_normalized": "5.0 FINAL CHECKS",
+      "outline": null,
+      "parent_section_slug": null,
+      "extractor_id": "generic_tables",
+      "body_markdown": "\n|   S N | OBSERVATION                                                    | STATUS   | RESULT   |\n|-------|----------------------------------------------------------------|----------|----------|\n|     1 | Complete Tightness Of Relay Panel                              | DONE     | OK       |\n|     2 | Relay Measurement Testing                                      | DONE     | OK       |\n|     3 | Relay Protection Testing                                       | DONE     | OK       |\n|     4 | Relay Indications (ON/OFF/Trip)                                | DONE     | OK       |\n|     5 | Relay Communication (RXD &TXD)                                 | -        | -        |\n|     6 | Binary Input &Binary Output Checking                           | -        | -        |\n|     7 | Cleaning of Auxiliary Relay                                    | -        | -        |\n|     8 | Cleaning of PCB cards of Numerical Relay (if required)         | DONE     | OK       |\n|     9 | Consolidate data &Control Scheme Checked                       | DONE     | OK       |\n|    10 | Trip of CB through Master Checked                              | DONE     | OK       |\n|    11 | Field Simulation of OTI/WTI/BUCH Fault Checked./ Motor Checked | -        | -        |\n|    12 | All CT Links Closed &Tightness Check after Testing             | DONE     | OK       |\n|    13 | All Protection Settings Normalized after Testing               | DONE     | OK       |\n|    14 | Testing DR Downloaded from the RELAY                           | -        | -        |\n|    15 | Auxiliary Relay (HR &SR) operation check.                      | DONE     | OK       |\n",
+      "tables": [
+        {
+          "headers": [
+            "S N",
+            "OBSERVATION",
+            "STATUS",
+            "RESULT"
+          ],
+          "rows": [
+            [
+              "1",
+              "Complete Tightness Of Relay Panel",
+              "DONE",
+              "OK"
+            ],
+            [
+              "2",
+              "Relay Measurement Testing",
+              "DONE",
+              "OK"
+            ],
+            [
+              "3",
+              "Relay Protection Testing",
+              "DONE",
+              "OK"
+            ],
+            [
+              "4",
+              "Relay Indications (ON/OFF/Trip)",
+              "DONE",
+              "OK"
+            ],
+            [
+              "5",
+              "Relay Communication (RXD &TXD)",
+              "-",
+              "-"
+            ],
+            [
+              "6",
+              "Binary Input &Binary Output Checking",
+              "-",
+              "-"
+            ],
+            [
+              "7",
+              "Cleaning of Auxiliary Relay",
+              "-",
+              "-"
+            ],
+            [
+              "8",
+              "Cleaning of PCB cards of Numerical Relay (if required)",
+              "DONE",
+              "OK"
+            ],
+            [
+              "9",
+              "Consolidate data &Control Scheme Checked",
+              "DONE",
+              "OK"
+            ],
+            [
+              "10",
+              "Trip of CB through Master Checked",
+              "DONE",
+              "OK"
+            ],
+            [
+              "11",
+              "Field Simulation of OTI/WTI/BUCH Fault Checked./ Motor Checked",
+              "-",
+              "-"
+            ],
+            [
+              "12",
+              "All CT Links Closed &Tightness Check after Testing",
+              "DONE",
+              "OK"
+            ],
+            [
+              "13",
+              "All Protection Settings Normalized after Testing",
+              "DONE",
+              "OK"
+            ],
+            [
+              "14",
+              "Testing DR Downloaded from the RELAY",
+              "-",
+              "-"
+            ],
+            [
+              "15",
+              "Auxiliary Relay (HR &SR) operation check.",
+              "DONE",
+              "OK"
+            ]
+          ],
+          "confidence": 1.0,
+          "header_depth": 1,
+          "grouped_headers": null
+        }
+      ],
+      "typed_payload": null,
+      "confidence": 1.0
+    },
+    {
+      "ordinal": 24,
+      "source_line_1based": 187,
+      "section_slug": "6-0-remarks-1",
+      "heading_kind": "atx",
+      "heading_raw": "## 6.0 REMARKS:   1)",
+      "heading_normalized": "6.0 REMARKS: 1)",
+      "outline": null,
+      "parent_section_slug": null,
+      "extractor_id": "generic_tables",
+      "body_markdown": "\n- All test results are found satisfactory.\n\n2) Tech trip relay healthiness check found ok while shorting L3 - 6 &amp; 7.\n\n| REFERENCE   | TESTED BY:- M/S. SHAILJA ENTERPRISES   | VERIFIED BY M/S. BHILAI STEEL PLANT   |\n|-------------|----------------------------------------|---------------------------------------|\n| NAME        | Mr. SHUBHAM R. SINGH                   | Mr.                                   |\n| SIGNATURE   |                                        |                                       |\n\nSHEET :\n\n3    OF 3\n\nPAGE\n\n: 3\n\nDATE\n\n: 30.04.2026",
+      "tables": [
+        {
+          "headers": [
+            "REFERENCE",
+            "TESTED BY:- M/S. SHAILJA ENTERPRISES",
+            "VERIFIED BY M/S. BHILAI STEEL PLANT"
+          ],
+          "rows": [
+            [
+              "NAME",
+              "Mr. SHUBHAM R. SINGH",
+              "Mr."
+            ],
+            [
+              "SIGNATURE",
+              "",
+              ""
+            ]
+          ],
+          "confidence": 1.0,
+          "header_depth": 1,
+          "grouped_headers": null
+        }
+      ],
+      "typed_payload": null,
+      "confidence": 1.0
+    }
+  ]
+}
