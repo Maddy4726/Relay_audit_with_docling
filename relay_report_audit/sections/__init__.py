@@ -9,6 +9,8 @@ __all__ = [
     "SectionTable",
     "extract_contact_resistance_from_markdown",
     "extract_contact_resistance_section_dict",
+    "extract_ct_ratio_test_dict",
+    "extract_ct_ratio_test_from_markdown",
     "extract_relay_section_tables",
 ]
 
@@ -16,6 +18,10 @@ if TYPE_CHECKING:
     from relay_report_audit.sections.contact_resistance_extract import (
         extract_contact_resistance_from_markdown,
         extract_contact_resistance_section_dict,
+    )
+    from relay_report_audit.sections.ct_ratio_extract import (
+        extract_ct_ratio_test_dict,
+        extract_ct_ratio_test_from_markdown,
     )
     from relay_report_audit.sections.markdown_table_extractor import (
         DEFAULT_TARGET_SECTIONS,
@@ -33,4 +39,8 @@ def __getattr__(name: str) -> Any:
         from relay_report_audit.sections import contact_resistance_extract
 
         return getattr(contact_resistance_extract, name)
+    if name in ("extract_ct_ratio_test_from_markdown", "extract_ct_ratio_test_dict"):
+        from relay_report_audit.sections import ct_ratio_extract
+
+        return getattr(ct_ratio_extract, name)
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
