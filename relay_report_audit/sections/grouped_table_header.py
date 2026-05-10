@@ -129,6 +129,41 @@ def _flat_headers(groups: list[TableColumnGroup]) -> list[str]:
     return out
 
 
+def infer_grouped_header_layout_leading_phase(
+    row_top: list[str],
+    row_bottom: list[str],
+) -> GroupedTableHeaderLayout | None:
+    """
+    Grouped header where Docling keeps a leading **Phase** column on both header rows.
+
+    Row 1: ``| Phase | Injected Current (A) ×3 | Operated Time (Sec) ×3 |``
+    Row 2: ``| Phase | X2 | X4 | X6 | X2 | X4 | X6 |``
+
+    Returns ``flat_headers`` starting with ``Phase`` then merged ``Group — sub`` for
+    the six measurement columns; ``grouped_headers`` lists only the injected /
+    operated groups (matching common report JSON examples).
+    """
+    if len(row_top) != len(row_bottom) or len(row_top) < 7:
+        return None
+    if row_top[0].strip().upper() != "PHASE" or row_bottom[0].strip().upper() != "PHASE":
+        return None
+    inner_top = row_top[1:]
+    inner_bot = row_bottom[1:]
+    inner = infer_grouped_header_layout(inner_top, inner_bot)
+    if inner is None:
+        return None
+    flat = ["Phase"] + list(inner.flat_headers)
+    if len(flat) != len(row_top):
+        return None
+    try:
+        return GroupedTableHeaderLayout(
+            grouped_headers=list(inner.grouped_headers),
+            flat_headers=flat,
+        )
+    except Exception:  # pragma: no cover
+        return None
+
+
 def infer_grouped_header_layout(
     row_top: list[str],
     row_bottom: list[str],
@@ -158,4 +193,7 @@ def infer_grouped_header_layout(
         return None
 
 
-__all__ = ["infer_grouped_header_layout"]
+__all__ = [
+    "infer_grouped_header_layout",
+    "infer_grouped_header_layout_leading_phase",
+]

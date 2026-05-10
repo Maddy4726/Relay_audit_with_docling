@@ -19,7 +19,11 @@ import re
 from dataclasses import dataclass
 from typing import Any, Final, Iterator
 
-from relay_report_audit.sections.grouped_table_header import infer_grouped_header_layout
+from relay_report_audit.sections.grouped_table_header import (
+    infer_grouped_header_layout,
+    infer_grouped_header_layout_leading_phase,
+)
+from relay_report_audit.sections.protection_row_repair import maybe_repair_protection_table_row
 
 logger = logging.getLogger(__name__)
 
@@ -325,6 +329,8 @@ def extract_tables_between_lines(
             sep_probe = _split_pipe_row(lines[i + 2])
             if _is_separator_row(sep_probe) and len(sep_probe) == len(cells_r1):
                 layout = infer_grouped_header_layout(cells_r1, probe_l2)
+                if layout is None:
+                    layout = infer_grouped_header_layout_leading_phase(cells_r1, probe_l2)
                 if layout is not None:
                     headers = list(layout.flat_headers)
                     grouped_meta = [g.model_dump() for g in layout.grouped_headers]
@@ -334,6 +340,26 @@ def extract_tables_between_lines(
                 header_depth = 2
                 data_start = i + 3
                 used_two_row_header = True
+
+        # Docling: group banner row + separator + sub-header row, then data (no extra separator).
+        if (
+            not used_two_row_header
+            and i + 2 < end
+            and _is_separator_row(probe_l2)
+            and len(probe_l2) == len(cells_r1)
+            and len(cells_r1) >= 7
+        ):
+            r3_cells = _split_pipe_row(lines[i + 2])
+            if len(r3_cells) == len(cells_r1) and not _is_separator_row(r3_cells):
+                layout2 = infer_grouped_header_layout_leading_phase(cells_r1, r3_cells)
+                if layout2 is None:
+                    layout2 = infer_grouped_header_layout(cells_r1, r3_cells)
+                if layout2 is not None:
+                    headers = list(layout2.flat_headers)
+                    grouped_meta = [g.model_dump() for g in layout2.grouped_headers]
+                    header_depth = 2
+                    data_start = i + 3
+                    used_two_row_header = True
 
         if not used_two_row_header:
             sep_cells = probe_l2
@@ -392,6 +418,8 @@ def extract_tables_between_lines(
                     break
 
             row_cells = _split_pipe_row(raw)
+            if len(row_cells) == len(headers) + 1 and not row_cells[0].strip():
+                row_cells = row_cells[1:]
 
             if len(row_cells) == 0:
                 if rows and stripped and "|" not in raw:
@@ -440,7 +468,14 @@ def extract_tables_between_lines(
                 k += 1
                 continue
 
-            rows.append(aligned)
+            repaired = maybe_repair_protection_table_row(headers, aligned)
+            if repaired is not aligned:
+                logger.debug(
+                    "Repaired protection row misalignment in section %s line %d",
+                    section_label,
+                    k + 1,
+                )
+            rows.append(repaired)
             k += 1
 
         header_ok = any(h.strip() for h in headers)
@@ -544,4 +579,6 @@ __all__ = [
     "extract_relay_section_tables",
     "extract_tables_between_lines",
     "infer_grouped_header_layout",
+    "infer_grouped_header_layout_leading_phase",
+    "maybe_repair_protection_table_row",
 ]

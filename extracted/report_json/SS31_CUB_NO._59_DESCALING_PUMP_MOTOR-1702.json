@@ -673,9 +673,9 @@
           ],
           "rows": [
             [
+              "RYB",
               "45.0",
-              "0.138",
-              "RYB"
+              "0.138"
             ]
           ],
           "confidence": 1.0,
@@ -747,9 +747,9 @@
           ],
           "rows": [
             [
+              "RYB",
               "12.35",
-              "1.057",
-              "RYB"
+              "1.057"
             ]
           ],
           "confidence": 1.0,
@@ -759,23 +759,14 @@
         {
           "headers": [
             "Phase",
-            "Injected Current (A)",
-            "Injected Current (A)",
-            "Injected Current (A)",
-            "Operated Time (Sec)",
-            "Operated Time (Sec)",
-            "Operated Time (Sec)"
+            "Injected Current (A) — X2",
+            "Injected Current (A) — X4",
+            "Injected Current (A) — X6",
+            "Operated Time (Sec) — X2",
+            "Operated Time (Sec) — X4",
+            "Operated Time (Sec) — X6"
           ],
           "rows": [
-            [
-              "Phase",
-              "X2",
-              "X4",
-              "X6",
-              "X2",
-              "X4",
-              "X6"
-            ],
             [
               "RYB",
               "2.1",
@@ -787,8 +778,25 @@
             ]
           ],
           "confidence": 1.0,
-          "header_depth": 1,
-          "grouped_headers": null
+          "header_depth": 2,
+          "grouped_headers": [
+            {
+              "group": "Injected Current (A)",
+              "columns": [
+                "X2",
+                "X4",
+                "X6"
+              ]
+            },
+            {
+              "group": "Operated Time (Sec)",
+              "columns": [
+                "X2",
+                "X4",
+                "X6"
+              ]
+            }
+          ]
         }
       ],
       "typed_payload": null,
@@ -817,9 +825,9 @@
           ],
           "rows": [
             [
+              "RYB",
               "12.5",
-              "10.068",
-              "RYB"
+              "10.068"
             ]
           ],
           "confidence": 1.0,
@@ -853,9 +861,9 @@
           ],
           "rows": [
             [
+              "RYB",
               "10.0",
-              "10.041",
-              "RYB"
+              "10.041"
             ]
           ],
           "confidence": 1.0,
