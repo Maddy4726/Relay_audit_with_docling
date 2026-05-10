@@ -23,6 +23,11 @@ class SectionTableData(BaseModel):
     headers: list[str]
     rows: list[list[str]]
     confidence: float = Field(ge=0.0, le=1.0)
+    header_depth: int = Field(default=1, ge=1, le=8)
+    grouped_headers: list[dict[str, Any]] | None = Field(
+        default=None,
+        description='Optional nested layout: [{"group": str, "columns": [...]}, ...].',
+    )
 
 
 class ReportSectionJson(BaseModel):

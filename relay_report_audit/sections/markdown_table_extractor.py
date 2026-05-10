@@ -19,6 +19,8 @@ import re
 from dataclasses import dataclass
 from typing import Any, Final, Iterator
 
+from relay_report_audit.sections.grouped_table_header import infer_grouped_header_layout
+
 logger = logging.getLogger(__name__)
 
 # Normalized (upper, single-spaced) section titles to locate in markdown headings.
@@ -135,6 +137,22 @@ def _align_row_to_header(headers: list[str], row: list[str]) -> tuple[list[str],
     return row[:h], True
 
 
+def _merge_stacked_header_lines(top: list[str], bot: list[str]) -> list[str]:
+    """Join two non-grouped header rows into one label per column (CT-style fallback)."""
+    if len(top) != len(bot):
+        return list(top)
+    merged: list[str] = []
+    for a_raw, b_raw in zip(top, bot, strict=True):
+        a, b = a_raw.strip(), b_raw.strip()
+        if not b:
+            merged.append(a_raw.strip())
+        elif not a:
+            merged.append(b)
+        else:
+            merged.append(f"{a} {b}".strip())
+    return merged
+
+
 def _compute_confidence(
     *,
     had_separator: bool,
@@ -142,6 +160,8 @@ def _compute_confidence(
     repeated_header_skips: int,
     num_rows: int,
     header_non_empty: bool,
+    grouped_header_detected: bool = False,
+    two_row_header_fallback: bool = False,
 ) -> float:
     """Deterministic 0..1 score from structural signals."""
     score = 1.0
@@ -153,6 +173,10 @@ def _compute_confidence(
         score -= 0.18
     score -= 0.06 * min(repeated_header_skips, 5)
     score -= 0.08 * min(ragged_rows, 6)
+    if grouped_header_detected:
+        score += 0.04
+    elif two_row_header_fallback:
+        score += 0.02
     return max(0.0, min(1.0, round(score, 4)))
 
 
@@ -164,14 +188,20 @@ class SectionTable:
     confidence: float
     headers: list[str]
     rows: list[list[str]]
+    grouped_headers: list[dict[str, Any]] | None = None
+    header_depth: int = 1
 
     def as_dict(self) -> dict[str, Any]:
-        return {
+        d: dict[str, Any] = {
             "section": self.section,
             "confidence": self.confidence,
             "headers": list(self.headers),
             "rows": [list(r) for r in self.rows],
+            "header_depth": self.header_depth,
         }
+        if self.grouped_headers is not None:
+            d["grouped_headers"] = list(self.grouped_headers)
+        return d
 
 
 @dataclass
@@ -273,23 +303,47 @@ def extract_tables_between_lines(
 
     while i < end:
         header_line = lines[i]
-        cells_header = _split_pipe_row(header_line)
-        if len(cells_header) < 1:
+        cells_r1 = _split_pipe_row(header_line)
+        if len(cells_r1) < 1:
             i += 1
             continue
-        if _is_separator_row(cells_header):
+        if _is_separator_row(cells_r1):
             i += 1
             continue
         if i + 1 >= end:
             break
-        sep_cells = _split_pipe_row(lines[i + 1])
-        if not _is_separator_row(sep_cells) or len(sep_cells) != len(cells_header):
-            i += 1
-            continue
 
-        headers = list(cells_header)
+        probe_l2 = _split_pipe_row(lines[i + 1])
+        grouped_meta: list[dict[str, Any]] | None = None
+        header_depth = 1
+        two_row_fallback = False
+        used_two_row_header = False
+        headers: list[str]
+        data_start: int
+
+        if i + 2 < end and not _is_separator_row(probe_l2) and len(probe_l2) == len(cells_r1):
+            sep_probe = _split_pipe_row(lines[i + 2])
+            if _is_separator_row(sep_probe) and len(sep_probe) == len(cells_r1):
+                layout = infer_grouped_header_layout(cells_r1, probe_l2)
+                if layout is not None:
+                    headers = list(layout.flat_headers)
+                    grouped_meta = [g.model_dump() for g in layout.grouped_headers]
+                else:
+                    headers = _merge_stacked_header_lines(cells_r1, probe_l2)
+                    two_row_fallback = True
+                header_depth = 2
+                data_start = i + 3
+                used_two_row_header = True
+
+        if not used_two_row_header:
+            sep_cells = probe_l2
+            if not _is_separator_row(sep_cells) or len(sep_cells) != len(cells_r1):
+                i += 1
+                continue
+            headers = list(cells_r1)
+            data_start = i + 2
+
         had_separator = True
-        data_start = i + 2
         rows: list[list[str]] = []
         ragged = 0
         repeated_skips = 0
@@ -396,14 +450,17 @@ def extract_tables_between_lines(
             repeated_header_skips=repeated_skips,
             num_rows=len(rows),
             header_non_empty=header_ok,
+            grouped_header_detected=grouped_meta is not None,
+            two_row_header_fallback=two_row_fallback,
         )
 
         logger.info(
-            "Extracted table in section %s: %d columns, %d data rows, confidence=%.4f",
+            "Extracted table in section %s: %d columns, %d data rows, confidence=%.4f%s",
             section_label,
             len(headers),
             len(rows),
             conf,
+            " (grouped header)" if grouped_meta else "",
         )
         results.append(
             SectionTable(
@@ -411,10 +468,12 @@ def extract_tables_between_lines(
                 confidence=conf,
                 headers=headers,
                 rows=rows,
+                grouped_headers=grouped_meta,
+                header_depth=header_depth,
             )
         )
-        # Always advance past header + separator to avoid a zero-row infinite loop.
-        i = max(k, i + 2)
+        # Always advance past header rows + separator to avoid a zero-row infinite loop.
+        i = max(k, i + header_depth + 1)
         continue
 
     return results
@@ -484,4 +543,5 @@ __all__ = [
     "extract_pipe_tables_from_markdown_fragment",
     "extract_relay_section_tables",
     "extract_tables_between_lines",
+    "infer_grouped_header_layout",
 ]

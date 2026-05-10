@@ -208,6 +208,8 @@ def _tables_models(tdicts: list[dict]) -> list[SectionTableData]:
                 headers=list(t.get("headers") or []),
                 rows=[list(r) for r in (t.get("rows") or [])],
                 confidence=float(t.get("confidence") or 0.0),
+                header_depth=int(t.get("header_depth") or 1),
+                grouped_headers=t.get("grouped_headers"),
             )
         )
     return out

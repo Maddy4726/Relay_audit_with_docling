@@ -23,6 +23,7 @@ from relay_report_audit.sections.markdown_table_extractor import (
     _parse_list_marker_section,
     _split_pipe_row,
 )
+from relay_report_audit.sections.grouped_table_header import infer_grouped_header_layout
 
 logger = logging.getLogger(__name__)
 
@@ -208,17 +209,20 @@ def _looks_like_phase_primary_header_row(cells: list[str]) -> bool:
 def _parse_tables_in_span(
     lines: list[str],
     span: _LineSpan,
-) -> list[tuple[list[str], list[list[str]], int, float]]:
+) -> list[tuple[list[str], list[list[str]], int, float, list[dict] | None]]:
     """
-    Yield ``(merged_headers, data_rows, header_row_count, table_confidence)`` per table.
+    Yield ``(merged_headers, data_rows, header_row_count, table_confidence, grouped_headers)``.
 
-    Supports optional two-row headers before the separator row.
+    ``grouped_headers`` is a list of ``{"group": str, "columns": [...]}`` when a
+    protection-style grouped layout is detected on the raw header rows; otherwise
+    ``None``. Merged headers are still used for CT column heuristics.
     """
-    out: list[tuple[list[str], list[list[str]], int, float]] = []
+    out: list[tuple[list[str], list[list[str]], int, float, list[dict] | None]] = []
     i = span.start_line
     end = span.end_line
 
     while i < end:
+        grouped_dicts: list[dict] | None = None
         r1 = _split_pipe_row(lines[i])
         if len(r1) < 2 or _is_separator_row(r1):
             i += 1
@@ -247,9 +251,14 @@ def _parse_tables_in_span(
                     and _looks_like_phase_primary_header_row(r3)
                     and len(_align_cells(r1, w)) == w
                 ):
-                    merged = _merge_double_header(_align_cells(r1, w), _align_cells(r3, w))
+                    r1a = _align_cells(r1, w)
+                    r3a = _align_cells(r3, w)
+                    merged = _merge_double_header(r1a, r3a)
                     data_start = sep_idx + 2
                     header_rows = 2
+                    gh = infer_grouped_header_layout(r1a, r3a)
+                    if gh is not None:
+                        grouped_dicts = [g.model_dump() for g in gh.grouped_headers]
                     logger.debug(
                         "Merged split CT header (banner+sep+labels) starting line %d",
                         i + 1,
@@ -266,6 +275,9 @@ def _parse_tables_in_span(
                     sep_idx = i + 2
                     header_rows = 2
                     data_start = sep_idx + 1
+                    gh = infer_grouped_header_layout(r1a, r2a)
+                    if gh is not None:
+                        grouped_dicts = [g.model_dump() for g in gh.grouped_headers]
                 else:
                     i += 1
                     continue
@@ -313,7 +325,7 @@ def _parse_tables_in_span(
             len(rows),
             tconf,
         )
-        out.append((merged, rows, header_rows, tconf))
+        out.append((merged, rows, header_rows, tconf, grouped_dicts))
         i = max(k, sep_idx + 1, i + header_rows + 1)
 
     return out
@@ -472,14 +484,14 @@ def extract_ct_ratio_test_from_markdown(markdown: str) -> CTRatioTestResult:
         logger.warning("Nominal CT ratio not found in prose")
         best_ratio = ""
 
-    best_tables: list[tuple[float, list[str], list[list[str]], float]] = []
+    best_tables: list[tuple[float, list[str], list[list[str]], float, list[dict] | None]] = []
     for sp in spans:
-        for merged_h, data_rows, _hdr_rows, tconf in _parse_tables_in_span(lines, sp):
+        for merged_h, data_rows, _hdr_rows, tconf, gh in _parse_tables_in_span(lines, sp):
             pick = _score_table(merged_h)
             if pick < 0.62:
                 logger.debug("Skip table: low CT score=%.2f headers=%r", pick, merged_h[:6])
                 continue
-            best_tables.append((pick, merged_h, data_rows, tconf))
+            best_tables.append((pick, merged_h, data_rows, tconf, gh))
 
     if not best_tables:
         logger.warning("No qualifying CT ratio tables found")
@@ -490,7 +502,7 @@ def extract_ct_ratio_test_from_markdown(markdown: str) -> CTRatioTestResult:
         )
 
     best_tables.sort(key=lambda x: (x[0], len(x[2]), x[3]), reverse=True)
-    pick_score, headers, rows, table_conf = best_tables[0]
+    pick_score, headers, rows, table_conf, grouped_headers = best_tables[0]
     logger.info(
         "Selected CT table rows=%d pick_score=%.3f table_conf=%.3f headers=%r",
         len(rows),
@@ -516,7 +528,12 @@ def extract_ct_ratio_test_from_markdown(markdown: str) -> CTRatioTestResult:
         len(measurements),
         conf,
     )
-    return CTRatioTestResult(ct_ratio=best_ratio, confidence=conf, measurements=measurements)
+    return CTRatioTestResult(
+        ct_ratio=best_ratio,
+        confidence=conf,
+        measurements=measurements,
+        grouped_headers=grouped_headers,
+    )
 
 
 def extract_ct_ratio_test_dict(markdown: str) -> dict:

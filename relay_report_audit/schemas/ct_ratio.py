@@ -6,7 +6,7 @@ Secondary currents are amperes unless the table header indicates milliamperes.
 
 from __future__ import annotations
 
-from typing import Literal
+from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -41,6 +41,10 @@ class CTRatioTestResult(BaseModel):
     ct_ratio: str = Field(description='Nominal ratio like "150/5".')
     confidence: float = Field(ge=0.0, le=1.0)
     measurements: list[CTMeasurement] = Field(default_factory=list)
+    grouped_headers: list[dict[str, Any]] | None = Field(
+        default=None,
+        description="Optional grouped/subcolumn layout from the primary CT table header.",
+    )
 
 
 __all__ = ["CTMeasurement", "CTRatioTestResult"]
