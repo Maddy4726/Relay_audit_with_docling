@@ -38,6 +38,7 @@
       ],
       "typed_payload": null,
       "protection_metadata": null,
+      "protection_engineering_validation": null,
       "confidence": 1.0
     },
     {
@@ -72,6 +73,7 @@
       ],
       "typed_payload": null,
       "protection_metadata": null,
+      "protection_engineering_validation": null,
       "confidence": 1.0
     },
     {
@@ -88,6 +90,7 @@
       "tables": [],
       "typed_payload": null,
       "protection_metadata": null,
+      "protection_engineering_validation": null,
       "confidence": 0.0
     },
     {
@@ -107,6 +110,7 @@
       "tables": [],
       "typed_payload": null,
       "protection_metadata": null,
+      "protection_engineering_validation": null,
       "confidence": 0.0
     },
     {
@@ -126,6 +130,7 @@
       "tables": [],
       "typed_payload": null,
       "protection_metadata": null,
+      "protection_engineering_validation": null,
       "confidence": 0.0
     },
     {
@@ -145,6 +150,7 @@
       "tables": [],
       "typed_payload": null,
       "protection_metadata": null,
+      "protection_engineering_validation": null,
       "confidence": 0.0
     },
     {
@@ -298,6 +304,7 @@
         ]
       },
       "protection_metadata": null,
+      "protection_engineering_validation": null,
       "confidence": 1.0
     },
     {
@@ -355,6 +362,7 @@
       ],
       "typed_payload": null,
       "protection_metadata": null,
+      "protection_engineering_validation": null,
       "confidence": 1.0
     },
     {
@@ -371,6 +379,7 @@
       "tables": [],
       "typed_payload": null,
       "protection_metadata": null,
+      "protection_engineering_validation": null,
       "confidence": 0.0
     },
     {
@@ -394,6 +403,7 @@
         "measurements": []
       },
       "protection_metadata": null,
+      "protection_engineering_validation": null,
       "confidence": 0.0
     },
     {
@@ -522,6 +532,7 @@
         ]
       },
       "protection_metadata": null,
+      "protection_engineering_validation": null,
       "confidence": 0.96
     },
     {
@@ -579,6 +590,7 @@
         ]
       },
       "protection_metadata": null,
+      "protection_engineering_validation": null,
       "confidence": 1.0
     },
     {
@@ -615,6 +627,7 @@
       ],
       "typed_payload": null,
       "protection_metadata": null,
+      "protection_engineering_validation": null,
       "confidence": 1.0
     },
     {
@@ -662,6 +675,7 @@
       ],
       "typed_payload": null,
       "protection_metadata": null,
+      "protection_engineering_validation": null,
       "confidence": 1.0
     },
     {
@@ -708,6 +722,26 @@
           }
         }
       ],
+      "protection_engineering_validation": {
+        "status": "PASS",
+        "checks": [
+          {
+            "type": "dtoc_delay_consistency",
+            "status": "PASS",
+            "message": "Programmed delay is sub-millisecond; strict equality vs operated time is skipped. Sanity: operated time within a bounded window.",
+            "evidence": {
+              "expected_delay_seconds": 0.00008,
+              "measured_operated_seconds": 0.138,
+              "table_row_index": 0,
+              "raw_metadata_text": "Set Current =    9.00 x In Delay =      0.08   mSec",
+              "comparison_mode": "micro_delay_sanity"
+            },
+            "tolerance": {
+              "operated_max_s": 2.0
+            }
+          }
+        ]
+      },
       "confidence": 1.0
     },
     {
@@ -756,6 +790,26 @@
           }
         }
       ],
+      "protection_engineering_validation": {
+        "status": "PASS",
+        "checks": [
+          {
+            "type": "thermal_overload_timing_consistency",
+            "status": "PASS",
+            "message": null,
+            "evidence": {
+              "calculated_time_seconds": 19.94,
+              "operated_time_seconds": 19.751,
+              "table_row_index": 0,
+              "absolute_difference_seconds": 0.18900000000000006
+            },
+            "tolerance": {
+              "relative": 0.05,
+              "absolute_seconds": 0.25
+            }
+          }
+        ]
+      },
       "confidence": 1.0
     },
     {
@@ -844,8 +898,81 @@
             "curve_type": "DT",
             "protection_scheme_hint": "dtoc_dt"
           }
+        },
+        {
+          "raw_metadata_text": "IDMT STAGE 2: Set Current =    0.21    x In       CURVE:  SI         TMS =    0.34",
+          "normalized": {
+            "stage_label": "IDMT STAGE 2",
+            "pickup_multiple_in": 0.21,
+            "curve_type": "SI",
+            "tms": 0.34,
+            "protection_scheme_hint": "idmt"
+          }
         }
       ],
+      "protection_engineering_validation": {
+        "status": "PASS",
+        "checks": [
+          {
+            "type": "dtoc_delay_consistency",
+            "status": "PASS",
+            "message": null,
+            "evidence": {
+              "expected_delay_seconds": 1.0,
+              "measured_operated_seconds": 1.057,
+              "table_row_index": 0,
+              "raw_metadata_text": "STAGE 1: Set Current =   2.47    x In      CURVE: DT          Delay = 1.00 Sec",
+              "absolute_difference_seconds": 0.05699999999999994
+            },
+            "tolerance": {
+              "relative": 0.1,
+              "absolute_seconds": 0.06
+            }
+          },
+          {
+            "type": "inverse_time_monotonicity",
+            "status": "PASS",
+            "message": "Operated times are monotone non-increasing with increasing injection.",
+            "evidence": {
+              "points_I_A": [
+                2.1,
+                4.2,
+                6.3
+              ],
+              "points_t_sec": [
+                3.491,
+                1.736,
+                1.336
+              ],
+              "epsilon_seconds": 0.17455,
+              "iec_si_exponent_documented": 0.02
+            },
+            "tolerance": {
+              "mono_rel": 0.05,
+              "mono_abs_s": 0.02
+            }
+          },
+          {
+            "type": "inverse_time_si_curve_shape",
+            "status": "PASS",
+            "message": null,
+            "evidence": {
+              "k_samples": [
+                0.02423365691549051,
+                0.029679792140045395
+              ],
+              "relative_spread": 0.10101626440083358,
+              "I_ref_amperes": 2.1,
+              "tms_from_metadata": 0.34,
+              "curve_type": "SI"
+            },
+            "tolerance": {
+              "max_relative_spread": 0.28,
+              "iec_si_alpha": 0.02
+            }
+          }
+        ]
+      },
       "confidence": 1.0
     },
     {
@@ -893,6 +1020,26 @@
           }
         }
       ],
+      "protection_engineering_validation": {
+        "status": "PASS",
+        "checks": [
+          {
+            "type": "startup_supervision_timing_consistency",
+            "status": "PASS",
+            "message": null,
+            "evidence": {
+              "startup_time_limit_seconds": 10.0,
+              "measured_operated_seconds": 10.068,
+              "table_row_index": 0,
+              "upper_bound_seconds": 11.05
+            },
+            "tolerance": {
+              "relative": 0.08,
+              "absolute_seconds": 0.25
+            }
+          }
+        ]
+      },
       "confidence": 1.0
     },
     {
@@ -961,6 +1108,26 @@
           }
         }
       ],
+      "protection_engineering_validation": {
+        "status": "PASS",
+        "checks": [
+          {
+            "type": "stall_during_run_timing_consistency",
+            "status": "PASS",
+            "message": null,
+            "evidence": {
+              "logic_delay_seconds": 12.0,
+              "measured_operated_seconds": 10.041,
+              "table_row_index": 0,
+              "upper_bound_seconds": 13.700000000000001
+            },
+            "tolerance": {
+              "relative": 0.1,
+              "absolute_seconds": 0.5
+            }
+          }
+        ]
+      },
       "confidence": 1.0
     },
     {
@@ -977,6 +1144,7 @@
       "tables": [],
       "typed_payload": null,
       "protection_metadata": null,
+      "protection_engineering_validation": null,
       "confidence": 0.0
     },
     {
@@ -993,6 +1161,7 @@
       "tables": [],
       "typed_payload": null,
       "protection_metadata": null,
+      "protection_engineering_validation": null,
       "confidence": 0.0
     },
     {
@@ -1009,6 +1178,7 @@
       "tables": [],
       "typed_payload": null,
       "protection_metadata": null,
+      "protection_engineering_validation": null,
       "confidence": 0.0
     },
     {
@@ -1052,6 +1222,26 @@
           }
         }
       ],
+      "protection_engineering_validation": {
+        "status": "SKIP",
+        "checks": [
+          {
+            "type": "earth_fault_timing_consistency",
+            "status": "SKIP",
+            "message": "Operated time cell is non-numeric; cannot compare to setting.",
+            "evidence": {
+              "expected_time_seconds": 0.5,
+              "measured_operated_seconds": null,
+              "table_row_index": 0,
+              "raw_operated_cell": "Operated"
+            },
+            "tolerance": {
+              "relative": 0.12,
+              "absolute_seconds": 0.15
+            }
+          }
+        ]
+      },
       "confidence": 1.0
     },
     {
@@ -1172,6 +1362,7 @@
       ],
       "typed_payload": null,
       "protection_metadata": null,
+      "protection_engineering_validation": null,
       "confidence": 1.0
     },
     {
@@ -1211,6 +1402,7 @@
       ],
       "typed_payload": null,
       "protection_metadata": null,
+      "protection_engineering_validation": null,
       "confidence": 1.0
     }
   ]

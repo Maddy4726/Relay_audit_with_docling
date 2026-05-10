@@ -60,6 +60,10 @@ class ReportSectionJson(BaseModel):
         default=None,
         description="Parsed protection-setting prose blocks (raw + normalized) for DTOC/IDMT-style sections.",
     )
+    protection_engineering_validation: dict[str, Any] | None = Field(
+        default=None,
+        description="Deterministic trip vs settings checks (PASS/WARN/FAIL/SKIP) with evidence.",
+    )
     confidence: float = Field(default=0.0, ge=0.0, le=1.0)
 
 

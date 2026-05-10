@@ -33,6 +33,8 @@ def _to_motor_record(s: ReportSectionJson) -> MotorFeederSectionRecord:
         payload["outline"] = s.outline
     if s.protection_metadata:
         payload["protection_metadata"] = s.protection_metadata
+    if s.protection_engineering_validation:
+        payload["protection_engineering_validation"] = s.protection_engineering_validation
     return MotorFeederSectionRecord(
         order_index=s.ordinal,
         header_line_1based=s.source_line_1based,

@@ -104,9 +104,9 @@ class TestProtectionMetadataExtract(unittest.TestCase):
 
 Set Current =   0.71 x In Time const.=     11.8    min
 
-| Phase | A |
-|-------|---|
-| RYB   | 1 |
+| Phase | Injected Current (A) | Calculated Time (Sec) | Operated Time (Sec) |
+|-------|----------------------|----------------------|----------------------|
+| RYB   | 21.3                 | 19.94                | 19.751               |
 """
         doc = build_report_document(md)
         sec = next(s for s in doc.sections if "THERMAL" in s.heading_normalized.upper())
@@ -116,6 +116,15 @@ Set Current =   0.71 x In Time const.=     11.8    min
         n = sec.protection_metadata[0]["normalized"]
         self.assertAlmostEqual(n["pickup_multiple_in"], 0.71)
         self.assertAlmostEqual(n["time_constant_min"], 11.8)
+        self.assertIsNotNone(sec.protection_engineering_validation)
+        assert sec.protection_engineering_validation is not None
+        self.assertEqual(sec.protection_engineering_validation["status"], "PASS")
+        self.assertTrue(
+            any(
+                c.get("type") == "thermal_overload_timing_consistency"
+                for c in sec.protection_engineering_validation.get("checks", [])
+            )
+        )
 
 
 if __name__ == "__main__":

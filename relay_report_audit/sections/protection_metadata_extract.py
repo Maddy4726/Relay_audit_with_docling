@@ -28,6 +28,38 @@ def extract_protection_body_prose(body_md: str) -> str:
     return "\n".join(lines).strip()
 
 
+def extract_all_protection_metadata_blocks_from_body(body_md: str) -> list[ProtectionMetadataBlock]:
+    """
+    Parse protection-setting prose between **every** GFM table block in the section.
+
+    ``extract_protection_body_prose`` only sees text before the first table; multi-stage
+    sections (e.g. DTOC stage 1 + IDMT stage 2) need this iterator so later settings
+    are not dropped.
+    """
+    lines = body_md.splitlines()
+    n = len(lines)
+    i = 0
+    out: list[ProtectionMetadataBlock] = []
+    while i < n:
+        prose_lines: list[str] = []
+        while i < n:
+            s = lines[i].strip()
+            if s.startswith("|") and s.count("|") >= 2:
+                break
+            prose_lines.append(lines[i])
+            i += 1
+        prose = "\n".join(prose_lines).strip()
+        if prose:
+            out.extend(parse_protection_metadata_blocks(prose))
+        while i < n:
+            s = lines[i].strip()
+            if s.startswith("|") and s.count("|") >= 2:
+                i += 1
+                continue
+            break
+    return out
+
+
 def _split_prose_chunks(prose: str) -> list[str]:
     """Split on blank-line runs; merge orphan ``Time =`` lines into previous chunk."""
     parts = [p.strip() for p in re.split(r"\n\s*\n+", prose.strip()) if p.strip()]
@@ -186,6 +218,7 @@ def is_protection_test_section_heading(normalized_title: str) -> bool:
 
 
 __all__ = [
+    "extract_all_protection_metadata_blocks_from_body",
     "extract_protection_body_prose",
     "is_protection_test_section_heading",
     "parse_protection_metadata_blocks",
