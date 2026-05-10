@@ -7,6 +7,8 @@ from typing import TYPE_CHECKING, Any
 __all__ = [
     "DEFAULT_TARGET_SECTIONS",
     "SectionTable",
+    "build_report_document",
+    "build_report_document_dict",
     "extract_contact_resistance_from_markdown",
     "extract_contact_resistance_section_dict",
     "extract_ct_ratio_test_dict",
@@ -22,6 +24,10 @@ if TYPE_CHECKING:
     from relay_report_audit.sections.motor_feeder_report import (
         process_motor_feeder_markdown,
         process_motor_feeder_markdown_dict,
+    )
+    from relay_report_audit.sections.report_document_extract import (
+        build_report_document,
+        build_report_document_dict,
     )
     from relay_report_audit.sections.contact_resistance_extract import (
         extract_contact_resistance_from_markdown,
@@ -61,4 +67,8 @@ def __getattr__(name: str) -> Any:
         from relay_report_audit.sections import motor_feeder_report
 
         return getattr(motor_feeder_report, name)
+    if name in ("build_report_document", "build_report_document_dict"):
+        from relay_report_audit.sections import report_document_extract
+
+        return getattr(report_document_extract, name)
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

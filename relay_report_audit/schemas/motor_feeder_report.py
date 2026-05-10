@@ -22,6 +22,10 @@ class MotorFeederSectionRecord(BaseModel):
         description="contact_resistance | ct_ratio | generic_tables | preamble",
     )
     confidence: float = Field(ge=0.0, le=1.0, default=0.0)
+    parent_section_slug: str | None = Field(
+        default=None,
+        description="Inferred parent heading slug (outline prefix or nearest caps banner).",
+    )
     payload: dict = Field(default_factory=dict)
 
 
