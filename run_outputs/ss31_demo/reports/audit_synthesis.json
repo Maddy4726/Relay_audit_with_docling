@@ -1,0 +1,569 @@
+{
+  "overall_status": "REVIEW",
+  "summary": {
+    "pass_sections": 15,
+    "warn_sections": 0,
+    "fail_sections": 0,
+    "review_sections": 10
+  },
+  "section_summaries": [
+    {
+      "ordinal": 0,
+      "section_slug": "preamble",
+      "heading_normalized": "PREAMBLE",
+      "extractor_id": "preamble",
+      "status": "PASS",
+      "confidence": 1.0,
+      "protection_checks": {},
+      "typed_payload_flags": []
+    },
+    {
+      "ordinal": 1,
+      "section_slug": "general",
+      "heading_normalized": "GENERAL",
+      "extractor_id": "generic_tables",
+      "status": "PASS",
+      "confidence": 1.0,
+      "protection_checks": {},
+      "typed_payload_flags": []
+    },
+    {
+      "ordinal": 2,
+      "section_slug": "circuit-breaker",
+      "heading_normalized": "CIRCUIT BREAKER",
+      "extractor_id": "generic_tables",
+      "status": "REVIEW",
+      "confidence": 0.0,
+      "protection_checks": {},
+      "typed_payload_flags": []
+    },
+    {
+      "ordinal": 3,
+      "section_slug": "name-plate-details",
+      "heading_normalized": "NAME PLATE DETAILS",
+      "extractor_id": "generic_tables",
+      "status": "REVIEW",
+      "confidence": 0.0,
+      "protection_checks": {},
+      "typed_payload_flags": []
+    },
+    {
+      "ordinal": 4,
+      "section_slug": "insulation-resistance-test-measured-values-in-g",
+      "heading_normalized": "INSULATION RESISTANCE TEST : (MEASURED VALUES IN GΩ)",
+      "extractor_id": "generic_tables",
+      "status": "REVIEW",
+      "confidence": 0.0,
+      "protection_checks": {},
+      "typed_payload_flags": []
+    },
+    {
+      "ordinal": 5,
+      "section_slug": "coil-resistance-test",
+      "heading_normalized": "COIL RESISTANCE TEST",
+      "extractor_id": "generic_tables",
+      "status": "REVIEW",
+      "confidence": 0.0,
+      "protection_checks": {},
+      "typed_payload_flags": []
+    },
+    {
+      "ordinal": 6,
+      "section_slug": "contact-resistance-test",
+      "heading_normalized": "CONTACT RESISTANCE TEST",
+      "extractor_id": "contact_resistance",
+      "status": "PASS",
+      "confidence": 1.0,
+      "protection_checks": {},
+      "typed_payload_flags": []
+    },
+    {
+      "ordinal": 7,
+      "section_slug": "time-interval-test",
+      "heading_normalized": "TIME INTERVAL TEST",
+      "extractor_id": "generic_tables",
+      "status": "PASS",
+      "confidence": 1.0,
+      "protection_checks": {},
+      "typed_payload_flags": []
+    },
+    {
+      "ordinal": 8,
+      "section_slug": "current-transformer",
+      "heading_normalized": "CURRENT TRANSFORMER",
+      "extractor_id": "generic_tables",
+      "status": "REVIEW",
+      "confidence": 0.0,
+      "protection_checks": {},
+      "typed_payload_flags": []
+    },
+    {
+      "ordinal": 9,
+      "section_slug": "ratio-test-by-primary-injection",
+      "heading_normalized": "RATIO TEST: (BY PRIMARY INJECTION)",
+      "extractor_id": "ct_ratio",
+      "status": "REVIEW",
+      "confidence": 0.0,
+      "protection_checks": {},
+      "typed_payload_flags": [
+        "ct_ratio_empty_measurements",
+        "ct_ratio_low_typed_confidence"
+      ]
+    },
+    {
+      "ordinal": 10,
+      "section_slug": "3-1-ct-ctr-150-5-a",
+      "heading_normalized": "3.1 CT (CTR: 150 / 5 A)",
+      "extractor_id": "ct_ratio",
+      "status": "PASS",
+      "confidence": 0.96,
+      "protection_checks": {},
+      "typed_payload_flags": []
+    },
+    {
+      "ordinal": 11,
+      "section_slug": "cbct-ratio-50-1-a",
+      "heading_normalized": "CBCT (RATIO: 50 / 1 A)",
+      "extractor_id": "ct_ratio",
+      "status": "REVIEW",
+      "confidence": 1.0,
+      "protection_checks": {},
+      "typed_payload_flags": [
+        "ct_ratio_empty_measurements",
+        "ct_ratio_low_typed_confidence"
+      ]
+    },
+    {
+      "ordinal": 12,
+      "section_slug": "relay-testing",
+      "heading_normalized": "RELAY TESTING",
+      "extractor_id": "generic_tables",
+      "status": "PASS",
+      "confidence": 1.0,
+      "protection_checks": {},
+      "typed_payload_flags": []
+    },
+    {
+      "ordinal": 13,
+      "section_slug": "protection-testing-by-secondary-injection-4-1-measurements",
+      "heading_normalized": "PROTECTION TESTING ( BY SECONDARY INJECTION) 4.1 MEASUREMENTS",
+      "extractor_id": "generic_tables",
+      "status": "PASS",
+      "confidence": 1.0,
+      "protection_checks": {},
+      "typed_payload_flags": []
+    },
+    {
+      "ordinal": 14,
+      "section_slug": "short-circuit-dtoc",
+      "heading_normalized": "SHORT CIRCUIT: (DTOC)",
+      "extractor_id": "generic_tables",
+      "status": "PASS",
+      "confidence": 1.0,
+      "protection_checks": {
+        "PASS": 1
+      },
+      "typed_payload_flags": []
+    },
+    {
+      "ordinal": 15,
+      "section_slug": "thermal-o-l",
+      "heading_normalized": "THERMAL O/L",
+      "extractor_id": "generic_tables",
+      "status": "PASS",
+      "confidence": 1.0,
+      "protection_checks": {
+        "PASS": 1
+      },
+      "typed_payload_flags": []
+    },
+    {
+      "ordinal": 16,
+      "section_slug": "negative-sequence-dtoc",
+      "heading_normalized": "NEGATIVE SEQUENCE:(DTOC)",
+      "extractor_id": "generic_tables",
+      "status": "PASS",
+      "confidence": 1.0,
+      "protection_checks": {
+        "PASS": 3
+      },
+      "typed_payload_flags": []
+    },
+    {
+      "ordinal": 17,
+      "section_slug": "prolonged-start-startup-supervision-mp",
+      "heading_normalized": "PROLONGED START/ STARTUP SUPERVISION: MP",
+      "extractor_id": "generic_tables",
+      "status": "PASS",
+      "confidence": 1.0,
+      "protection_checks": {
+        "PASS": 1
+      },
+      "typed_payload_flags": []
+    },
+    {
+      "ordinal": 18,
+      "section_slug": "stall-during-running-dtoc",
+      "heading_normalized": "STALL DURING RUNNING: (DTOC)",
+      "extractor_id": "generic_tables",
+      "status": "PASS",
+      "confidence": 1.0,
+      "protection_checks": {
+        "PASS": 1
+      },
+      "typed_payload_flags": []
+    },
+    {
+      "ordinal": 19,
+      "section_slug": "shailja-enterprises",
+      "heading_normalized": "SHAILJA ENTERPRISES",
+      "extractor_id": "generic_tables",
+      "status": "REVIEW",
+      "confidence": 0.0,
+      "protection_checks": {},
+      "typed_payload_flags": []
+    },
+    {
+      "ordinal": 20,
+      "section_slug": "test-report-for-motor-feeder",
+      "heading_normalized": "TEST REPORT FOR MOTOR FEEDER",
+      "extractor_id": "generic_tables",
+      "status": "REVIEW",
+      "confidence": 0.0,
+      "protection_checks": {},
+      "typed_payload_flags": []
+    },
+    {
+      "ordinal": 21,
+      "section_slug": "bhilai-steel-plant-bhilai-chhattisgarh",
+      "heading_normalized": "BHILAI STEEL PLANT ,BHILAI (CHHATTISGARH)",
+      "extractor_id": "generic_tables",
+      "status": "REVIEW",
+      "confidence": 0.0,
+      "protection_checks": {},
+      "typed_payload_flags": []
+    },
+    {
+      "ordinal": 22,
+      "section_slug": "4-7-earth-fault-protection-e-f-operated-through-cbct",
+      "heading_normalized": "4.7 EARTH FAULT PROTECTION (E/F): OPERATED THROUGH CBCT",
+      "extractor_id": "generic_tables",
+      "status": "PASS",
+      "confidence": 1.0,
+      "protection_checks": {
+        "SKIP": 1
+      },
+      "typed_payload_flags": []
+    },
+    {
+      "ordinal": 23,
+      "section_slug": "5-0-final-checks",
+      "heading_normalized": "5.0 FINAL CHECKS",
+      "extractor_id": "generic_tables",
+      "status": "PASS",
+      "confidence": 1.0,
+      "protection_checks": {},
+      "typed_payload_flags": []
+    },
+    {
+      "ordinal": 24,
+      "section_slug": "6-0-remarks-1",
+      "heading_normalized": "6.0 REMARKS: 1)",
+      "extractor_id": "generic_tables",
+      "status": "PASS",
+      "confidence": 1.0,
+      "protection_checks": {},
+      "typed_payload_flags": []
+    }
+  ],
+  "findings": [
+    {
+      "severity": "REVIEW",
+      "priority_rank": 2,
+      "section": "RATIO TEST: (BY PRIMARY INJECTION)",
+      "section_slug": "ratio-test-by-primary-injection",
+      "source_line_1based": 58,
+      "ordinal": 9,
+      "type": "typed_payload_review",
+      "message": "Typed extractor quality flags require human review.",
+      "evidence": {
+        "section_slug": "ratio-test-by-primary-injection",
+        "heading_raw": "3. RATIO TEST: (BY PRIMARY INJECTION)",
+        "heading_normalized": "RATIO TEST: (BY PRIMARY INJECTION)",
+        "ordinal": 9,
+        "extractor_id": "ct_ratio",
+        "typed_payload": {
+          "section": "CT RATIO TEST",
+          "ct_ratio": "",
+          "confidence": 0.0,
+          "measurements": []
+        },
+        "flags": [
+          "ct_ratio_empty_measurements",
+          "ct_ratio_low_typed_confidence"
+        ],
+        "section_confidence": 0.0
+      }
+    },
+    {
+      "severity": "REVIEW",
+      "priority_rank": 2,
+      "section": "CBCT (RATIO: 50 / 1 A)",
+      "section_slug": "cbct-ratio-50-1-a",
+      "source_line_1based": 78,
+      "ordinal": 11,
+      "type": "typed_payload_review",
+      "message": "Typed extractor quality flags require human review.",
+      "evidence": {
+        "section_slug": "cbct-ratio-50-1-a",
+        "heading_raw": "3.2 CBCT (RATIO:    50  /   1 A)",
+        "heading_normalized": "CBCT (RATIO: 50 / 1 A)",
+        "ordinal": 11,
+        "extractor_id": "ct_ratio",
+        "typed_payload": {
+          "section": "CT RATIO TEST",
+          "ct_ratio": "50/1",
+          "confidence": 0.6025,
+          "measurements": [],
+          "tables_fallback": [
+            {
+              "section": "cbct-ratio-50-1-a",
+              "confidence": 1.0,
+              "headers": [
+                "Injected current in Primary (A)",
+                "Measured current in Secondary (mA)"
+              ],
+              "rows": [
+                [
+                  "10",
+                  "212.0"
+                ]
+              ],
+              "header_depth": 1
+            }
+          ]
+        },
+        "flags": [
+          "ct_ratio_empty_measurements",
+          "ct_ratio_low_typed_confidence"
+        ],
+        "section_confidence": 1.0
+      }
+    },
+    {
+      "severity": "REVIEW",
+      "priority_rank": 3,
+      "section": "CIRCUIT BREAKER",
+      "section_slug": "circuit-breaker",
+      "source_line_1based": 12,
+      "ordinal": 2,
+      "type": "low_section_confidence",
+      "message": "Section confidence 0.000 is below threshold 0.72.",
+      "evidence": {
+        "section_slug": "circuit-breaker",
+        "heading_normalized": "CIRCUIT BREAKER",
+        "ordinal": 2,
+        "extractor_id": "generic_tables",
+        "confidence": 0.0,
+        "threshold": 0.72
+      }
+    },
+    {
+      "severity": "REVIEW",
+      "priority_rank": 3,
+      "section": "NAME PLATE DETAILS",
+      "section_slug": "name-plate-details",
+      "source_line_1based": 14,
+      "ordinal": 3,
+      "type": "low_section_confidence",
+      "message": "Section confidence 0.000 is below threshold 0.72.",
+      "evidence": {
+        "section_slug": "name-plate-details",
+        "heading_normalized": "NAME PLATE DETAILS",
+        "ordinal": 3,
+        "extractor_id": "generic_tables",
+        "confidence": 0.0,
+        "threshold": 0.72
+      }
+    },
+    {
+      "severity": "REVIEW",
+      "priority_rank": 3,
+      "section": "INSULATION RESISTANCE TEST : (MEASURED VALUES IN GΩ)",
+      "section_slug": "insulation-resistance-test-measured-values-in-g",
+      "source_line_1based": 15,
+      "ordinal": 4,
+      "type": "low_section_confidence",
+      "message": "Section confidence 0.000 is below threshold 0.72.",
+      "evidence": {
+        "section_slug": "insulation-resistance-test-measured-values-in-g",
+        "heading_normalized": "INSULATION RESISTANCE TEST : (MEASURED VALUES IN GΩ)",
+        "ordinal": 4,
+        "extractor_id": "generic_tables",
+        "confidence": 0.0,
+        "threshold": 0.72
+      }
+    },
+    {
+      "severity": "REVIEW",
+      "priority_rank": 3,
+      "section": "COIL RESISTANCE TEST",
+      "section_slug": "coil-resistance-test",
+      "source_line_1based": 16,
+      "ordinal": 5,
+      "type": "low_section_confidence",
+      "message": "Section confidence 0.000 is below threshold 0.72.",
+      "evidence": {
+        "section_slug": "coil-resistance-test",
+        "heading_normalized": "COIL RESISTANCE TEST",
+        "ordinal": 5,
+        "extractor_id": "generic_tables",
+        "confidence": 0.0,
+        "threshold": 0.72
+      }
+    },
+    {
+      "severity": "REVIEW",
+      "priority_rank": 3,
+      "section": "CURRENT TRANSFORMER",
+      "section_slug": "current-transformer",
+      "source_line_1based": 56,
+      "ordinal": 8,
+      "type": "low_section_confidence",
+      "message": "Section confidence 0.000 is below threshold 0.72.",
+      "evidence": {
+        "section_slug": "current-transformer",
+        "heading_normalized": "CURRENT TRANSFORMER",
+        "ordinal": 8,
+        "extractor_id": "generic_tables",
+        "confidence": 0.0,
+        "threshold": 0.72
+      }
+    },
+    {
+      "severity": "REVIEW",
+      "priority_rank": 3,
+      "section": "SHAILJA ENTERPRISES",
+      "section_slug": "shailja-enterprises",
+      "source_line_1based": 151,
+      "ordinal": 19,
+      "type": "low_section_confidence",
+      "message": "Section confidence 0.000 is below threshold 0.72.",
+      "evidence": {
+        "section_slug": "shailja-enterprises",
+        "heading_normalized": "SHAILJA ENTERPRISES",
+        "ordinal": 19,
+        "extractor_id": "generic_tables",
+        "confidence": 0.0,
+        "threshold": 0.72
+      }
+    },
+    {
+      "severity": "REVIEW",
+      "priority_rank": 3,
+      "section": "TEST REPORT FOR MOTOR FEEDER",
+      "section_slug": "test-report-for-motor-feeder",
+      "source_line_1based": 153,
+      "ordinal": 20,
+      "type": "low_section_confidence",
+      "message": "Section confidence 0.000 is below threshold 0.72.",
+      "evidence": {
+        "section_slug": "test-report-for-motor-feeder",
+        "heading_normalized": "TEST REPORT FOR MOTOR FEEDER",
+        "ordinal": 20,
+        "extractor_id": "generic_tables",
+        "confidence": 0.0,
+        "threshold": 0.72
+      }
+    },
+    {
+      "severity": "REVIEW",
+      "priority_rank": 3,
+      "section": "BHILAI STEEL PLANT ,BHILAI (CHHATTISGARH)",
+      "section_slug": "bhilai-steel-plant-bhilai-chhattisgarh",
+      "source_line_1based": 155,
+      "ordinal": 21,
+      "type": "low_section_confidence",
+      "message": "Section confidence 0.000 is below threshold 0.72.",
+      "evidence": {
+        "section_slug": "bhilai-steel-plant-bhilai-chhattisgarh",
+        "heading_normalized": "BHILAI STEEL PLANT ,BHILAI (CHHATTISGARH)",
+        "ordinal": 21,
+        "extractor_id": "generic_tables",
+        "confidence": 0.0,
+        "threshold": 0.72
+      }
+    }
+  ],
+  "confidence": {
+    "document_confidence": 0.6384,
+    "low_confidence_sections": [
+      {
+        "section_slug": "circuit-breaker",
+        "heading_normalized": "CIRCUIT BREAKER",
+        "confidence": 0.0,
+        "extractor_id": "generic_tables",
+        "reason": "section_confidence_below_threshold"
+      },
+      {
+        "section_slug": "name-plate-details",
+        "heading_normalized": "NAME PLATE DETAILS",
+        "confidence": 0.0,
+        "extractor_id": "generic_tables",
+        "reason": "section_confidence_below_threshold"
+      },
+      {
+        "section_slug": "insulation-resistance-test-measured-values-in-g",
+        "heading_normalized": "INSULATION RESISTANCE TEST : (MEASURED VALUES IN GΩ)",
+        "confidence": 0.0,
+        "extractor_id": "generic_tables",
+        "reason": "section_confidence_below_threshold"
+      },
+      {
+        "section_slug": "coil-resistance-test",
+        "heading_normalized": "COIL RESISTANCE TEST",
+        "confidence": 0.0,
+        "extractor_id": "generic_tables",
+        "reason": "section_confidence_below_threshold"
+      },
+      {
+        "section_slug": "current-transformer",
+        "heading_normalized": "CURRENT TRANSFORMER",
+        "confidence": 0.0,
+        "extractor_id": "generic_tables",
+        "reason": "section_confidence_below_threshold"
+      },
+      {
+        "section_slug": "ratio-test-by-primary-injection",
+        "heading_normalized": "RATIO TEST: (BY PRIMARY INJECTION)",
+        "confidence": 0.0,
+        "extractor_id": "ct_ratio",
+        "reason": "section_confidence_below_threshold"
+      },
+      {
+        "section_slug": "shailja-enterprises",
+        "heading_normalized": "SHAILJA ENTERPRISES",
+        "confidence": 0.0,
+        "extractor_id": "generic_tables",
+        "reason": "section_confidence_below_threshold"
+      },
+      {
+        "section_slug": "test-report-for-motor-feeder",
+        "heading_normalized": "TEST REPORT FOR MOTOR FEEDER",
+        "confidence": 0.0,
+        "extractor_id": "generic_tables",
+        "reason": "section_confidence_below_threshold"
+      },
+      {
+        "section_slug": "bhilai-steel-plant-bhilai-chhattisgarh",
+        "heading_normalized": "BHILAI STEEL PLANT ,BHILAI (CHHATTISGARH)",
+        "confidence": 0.0,
+        "extractor_id": "generic_tables",
+        "reason": "section_confidence_below_threshold"
+      }
+    ]
+  },
+  "review_recommendations": [
+    "Manually verify 10 section(s) marked REVIEW (low extraction confidence and/or typed extractor flags)."
+  ]
+}

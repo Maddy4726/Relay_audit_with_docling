@@ -1,0 +1,118 @@
+========================================================================
+                          RELAY AUDIT SUMMARY                           
+========================================================================
+
+OVERALL STATUS: REVIEW
+(renderer v1, deterministic)
+
+OPERATOR REMARKS
+------------------------------------------------------------------------
+The document audit completed with overall status REVIEW. Sections: 15 PASS, 0 WARN, 0 FAIL, 10 REVIEW (by section-level rollup). Extraction or typed-output quality requires human verification on flagged sections.
+
+SUMMARY (sections)
+------------------------------------------------------------------------
+  PASS:    15
+  WARN:    0
+  FAIL:    0
+  REVIEW:  10
+
+CONFIDENCE
+------------------------------------------------------------------------
+Document confidence: 0.638 (0-1 scale; mean of section confidences).
+Low extraction confidence (sections):
+  - circuit-breaker | CIRCUIT BREAKER | conf=0.000 | generic_tables | section_confidence_below_threshold
+  - name-plate-details | NAME PLATE DETAILS | conf=0.000 | generic_tables | section_confidence_below_threshold
+  - insulation-resistance-test-measured-values-in-g | INSULATION RESISTANCE TEST : (MEASURED VALUES IN GΩ) | conf=0.000 | generic_tables | section_confidence_below_threshold
+  - coil-resistance-test | COIL RESISTANCE TEST | conf=0.000 | generic_tables | section_confidence_below_threshold
+  - current-transformer | CURRENT TRANSFORMER | conf=0.000 | generic_tables | section_confidence_below_threshold
+  - ratio-test-by-primary-injection | RATIO TEST: (BY PRIMARY INJECTION) | conf=0.000 | ct_ratio | section_confidence_below_threshold
+  - shailja-enterprises | SHAILJA ENTERPRISES | conf=0.000 | generic_tables | section_confidence_below_threshold
+  - test-report-for-motor-feeder | TEST REPORT FOR MOTOR FEEDER | conf=0.000 | generic_tables | section_confidence_below_threshold
+  - bhilai-steel-plant-bhilai-chhattisgarh | BHILAI STEEL PLANT ,BHILAI (CHHATTISGARH) | conf=0.000 | generic_tables | section_confidence_below_threshold
+
+SECTION STATUS
+------------------------------------------------------------------------
+#  Section slug  |  Status  |  Conf  |  Extractor
+  0  preamble                                  PASS    1.000  preamble
+  1  general                                   PASS    1.000  generic_tables
+  2  circuit-breaker                           REVIEW  0.000  generic_tables
+  3  name-plate-details                        REVIEW  0.000  generic_tables
+  4  insulation-resistance-test-measured-values-in-g  REVIEW  0.000  generic_tables
+  5  coil-resistance-test                      REVIEW  0.000  generic_tables
+  6  contact-resistance-test                   PASS    1.000  contact_resistance
+  7  time-interval-test                        PASS    1.000  generic_tables
+  8  current-transformer                       REVIEW  0.000  generic_tables
+  9  ratio-test-by-primary-injection           REVIEW  0.000  ct_ratio
+ 10  3-1-ct-ctr-150-5-a                        PASS    0.960  ct_ratio
+ 11  cbct-ratio-50-1-a                         REVIEW  1.000  ct_ratio
+ 12  relay-testing                             PASS    1.000  generic_tables
+ 13  protection-testing-by-secondary-injection-4-1-measurements  PASS    1.000  generic_tables
+ 14  short-circuit-dtoc                        PASS    1.000  generic_tables
+ 15  thermal-o-l                               PASS    1.000  generic_tables
+ 16  negative-sequence-dtoc                    PASS    1.000  generic_tables
+ 17  prolonged-start-startup-supervision-mp    PASS    1.000  generic_tables
+ 18  stall-during-running-dtoc                 PASS    1.000  generic_tables
+ 19  shailja-enterprises                       REVIEW  0.000  generic_tables
+ 20  test-report-for-motor-feeder              REVIEW  0.000  generic_tables
+ 21  bhilai-steel-plant-bhilai-chhattisgarh    REVIEW  0.000  generic_tables
+ 22  4-7-earth-fault-protection-e-f-operated-through-cbct  PASS    1.000  generic_tables
+ 23  5-0-final-checks                          PASS    1.000  generic_tables
+ 24  6-0-remarks-1                             PASS    1.000  generic_tables
+
+KEY FINDINGS (FAIL > WARN > REVIEW)
+------------------------------------------------------------------------
+1. RATIO TEST: (BY PRIMARY INJECTION)  [ratio-test-by-primary-injection]
+   - REVIEW: typed_payload_review: Typed extractor quality flags require human review.
+     Evidence: flags: ct_ratio_empty_measurements, ct_ratio_low_typed_confidence
+     Source line: 58
+
+2. CBCT (RATIO: 50 / 1 A)  [cbct-ratio-50-1-a]
+   - REVIEW: typed_payload_review: Typed extractor quality flags require human review.
+     Evidence: flags: ct_ratio_empty_measurements, ct_ratio_low_typed_confidence
+     Source line: 78
+
+3. CIRCUIT BREAKER  [circuit-breaker]
+   - REVIEW: low_section_confidence: Section confidence 0.000 is below threshold 0.72.
+     Evidence: confidence=0.0 threshold=0.72
+     Source line: 12
+
+4. NAME PLATE DETAILS  [name-plate-details]
+   - REVIEW: low_section_confidence: Section confidence 0.000 is below threshold 0.72.
+     Evidence: confidence=0.0 threshold=0.72
+     Source line: 14
+
+5. INSULATION RESISTANCE TEST : (MEASURED VALUES IN GΩ)  [insulation-resistance-test-measured-values-in-g]
+   - REVIEW: low_section_confidence: Section confidence 0.000 is below threshold 0.72.
+     Evidence: confidence=0.0 threshold=0.72
+     Source line: 15
+
+6. COIL RESISTANCE TEST  [coil-resistance-test]
+   - REVIEW: low_section_confidence: Section confidence 0.000 is below threshold 0.72.
+     Evidence: confidence=0.0 threshold=0.72
+     Source line: 16
+
+7. CURRENT TRANSFORMER  [current-transformer]
+   - REVIEW: low_section_confidence: Section confidence 0.000 is below threshold 0.72.
+     Evidence: confidence=0.0 threshold=0.72
+     Source line: 56
+
+8. SHAILJA ENTERPRISES  [shailja-enterprises]
+   - REVIEW: low_section_confidence: Section confidence 0.000 is below threshold 0.72.
+     Evidence: confidence=0.0 threshold=0.72
+     Source line: 151
+
+9. TEST REPORT FOR MOTOR FEEDER  [test-report-for-motor-feeder]
+   - REVIEW: low_section_confidence: Section confidence 0.000 is below threshold 0.72.
+     Evidence: confidence=0.0 threshold=0.72
+     Source line: 153
+
+10. BHILAI STEEL PLANT ,BHILAI (CHHATTISGARH)  [bhilai-steel-plant-bhilai-chhattisgarh]
+   - REVIEW: low_section_confidence: Section confidence 0.000 is below threshold 0.72.
+     Evidence: confidence=0.0 threshold=0.72
+     Source line: 155
+
+REVIEW RECOMMENDATIONS
+------------------------------------------------------------------------
+  * Manually verify 10 section(s) marked REVIEW (low extraction confidence and/or typed extractor flags).
+
+========================================================================
