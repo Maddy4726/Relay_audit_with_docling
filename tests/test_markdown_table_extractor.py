@@ -33,6 +33,37 @@ class TestMarkdownTableExtractor(unittest.TestCase):
         self.assertEqual(t["rows"][0], ["A", "1.2", "5"])
         self.assertGreater(t["confidence"], 0.85)
 
+    def test_list_marker_section_docling_style(self) -> None:
+        md = """
+## CIRCUIT BREAKER
+
+- 2.3 COIL RESISTANCE TEST:
+
+| A | B |
+| - | - |
+| x | y |
+
+- 2.4 CONTACT RESISTANCE TEST:
+
+Applied Current (100A)
+
+| Phase Ref. | Measured Resistance in Micro ohms |
+| ---------- | ----------------------------------- |
+| R | 96.9 |
+| Y | 120.0 |
+
+- 2.5 TIME INTERVAL TEST:
+
+| Op | t |
+| -- | - |
+| C | 1 |
+"""
+        out = extract_relay_section_tables(md)
+        self.assertEqual(len(out), 1)
+        self.assertEqual(out[0]["section"], "CONTACT RESISTANCE TEST")
+        self.assertIn("Phase Ref.", out[0]["headers"][0])
+        self.assertEqual(len(out[0]["rows"]), 2)
+
     def test_repeated_header_row_skipped(self) -> None:
         md = """
 ## OVERLOAD PROTECTION

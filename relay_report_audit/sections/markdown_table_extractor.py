@@ -1,9 +1,13 @@
 """
 Deterministic extraction of GitHub-flavored markdown pipe tables from Docling output.
 
-Scans markdown for ATX headings that match configured relay report section titles,
-parses pipe tables under each section (until the next heading of the same or higher
-outline level), and returns structured records with confidence scores.
+Scans markdown for section markers that match configured relay report titles:
+
+* ATX headings (``## CONTACT RESISTANCE TEST``)
+* Docling-style list labels (``- 2.4 CONTACT RESISTANCE TEST:``)
+
+Then parses pipe tables under each span (until the next sibling heading/list marker
+or ATX heading) and returns structured records with confidence scores.
 
 No LLMs: purely rule-based parsing and heuristics.
 """
@@ -25,14 +29,35 @@ DEFAULT_TARGET_SECTIONS: Final[tuple[str, ...]] = (
 )
 
 _ATX_HEADING_RE = re.compile(r"^(#{1,6})\s+(.+?)\s*$")
+# List markers: "- 2.4 TITLE" or "- 2.2INSULATION ..." (Docling sometimes omits space).
+_LIST_MARKER_SPACED_RE = re.compile(r"^\s*[-*+]\s+(\d+(?:\.\d+)*)\s+(.+)$")
+_LIST_MARKER_TIGHT_RE = re.compile(r"^\s*[-*+]\s+(\d+(?:\.\d+)+)([A-Za-z].*)$")
 
 
 def _normalize_section_title(raw: str) -> str:
-    """Collapse whitespace, strip markdown emphasis markers, uppercase."""
+    """Collapse whitespace, strip markdown emphasis markers, uppercase, trim trailing punctuation."""
     t = raw.strip().replace("`", "")
     t = re.sub(r"\*+", "", t)
     t = re.sub(r"\s+", " ", t).strip().upper()
+    while t and t[-1] in " .;:,-_":
+        t = t[:-1].strip()
     return t
+
+
+def _parse_list_marker_section(line: str) -> tuple[str, str] | None:
+    """
+    Parse a markdown list line that starts with a numeric clause (e.g. ``2.4``).
+
+    Returns ``(numeric_prefix, title_rest)`` or ``None`` if the line is not this shape.
+    """
+    s = line.rstrip("\n")
+    m = _LIST_MARKER_SPACED_RE.match(s)
+    if m:
+        return m.group(1), m.group(2).strip()
+    m = _LIST_MARKER_TIGHT_RE.match(s)
+    if m:
+        return m.group(1), m.group(2).strip()
+    return None
 
 
 def _parse_atx_heading(line: str) -> tuple[int, str] | None:
@@ -152,7 +177,7 @@ class SectionTable:
 @dataclass
 class _SectionSpan:
     title: str
-    heading_level: int
+    heading_level: int  # ATX depth, or 0 for list-marker sections
     start_line: int
     end_line: int  # exclusive
 
@@ -161,40 +186,66 @@ def _iter_target_section_spans(
     lines: list[str],
     targets_normalized: set[str],
 ) -> Iterator[_SectionSpan]:
-    """Yield spans of body lines (indices) under each matching ATX heading."""
+    """Yield body line spans for each matching ATX heading or list-style section label."""
     i = 0
     n = len(lines)
     while i < n:
-        parsed = _parse_atx_heading(lines[i])
-        if parsed is None:
-            i += 1
-            continue
-        level, title = parsed
-        norm = _normalize_section_title(title)
-        if norm not in targets_normalized:
-            i += 1
-            continue
+        line = lines[i]
+        parsed = _parse_atx_heading(line)
+        if parsed is not None:
+            level, title = parsed
+            norm = _normalize_section_title(title)
+            if norm in targets_normalized:
+                start_body = i + 1
+                j = start_body
+                while j < n:
+                    inner = _parse_atx_heading(lines[j])
+                    if inner is not None:
+                        inner_level, _ = inner
+                        if inner_level <= level:
+                            break
+                    j += 1
 
-        start_body = i + 1
-        j = start_body
-        while j < n:
-            inner = _parse_atx_heading(lines[j])
-            if inner is not None:
-                inner_level, _ = inner
-                if inner_level <= level:
-                    break
-            j += 1
+                logger.debug(
+                    "Matched ATX section %r at line %d (level %d), body lines [%d, %d)",
+                    norm,
+                    i + 1,
+                    level,
+                    start_body + 1,
+                    j + 1,
+                )
+                yield _SectionSpan(title=norm, heading_level=level, start_line=start_body, end_line=j)
+                i = j
+                continue
 
-        logger.debug(
-            "Matched section %r at line %d (level %d), body lines [%d, %d)",
-            norm,
-            i + 1,
-            level,
-            start_body + 1,
-            j + 1,
-        )
-        yield _SectionSpan(title=norm, heading_level=level, start_line=start_body, end_line=j)
-        i = j
+        lst = _parse_list_marker_section(line)
+        if lst is not None:
+            list_no, rest = lst
+            norm = _normalize_section_title(rest)
+            if norm in targets_normalized:
+                start_body = i + 1
+                j = start_body
+                while j < n:
+                    if _parse_atx_heading(lines[j]) is not None:
+                        break
+                    nxt = _parse_list_marker_section(lines[j])
+                    if nxt is not None and nxt[0] != list_no:
+                        break
+                    j += 1
+
+                logger.debug(
+                    "Matched list section %r at line %d (clause %s), body lines [%d, %d)",
+                    norm,
+                    i + 1,
+                    list_no,
+                    start_body + 1,
+                    j + 1,
+                )
+                yield _SectionSpan(title=norm, heading_level=0, start_line=start_body, end_line=j)
+                i = j
+                continue
+
+        i += 1
 
 
 def _append_continuation_to_previous_row(rows: list[list[str]], text: str) -> None:
